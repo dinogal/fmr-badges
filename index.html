@@ -6,12 +6,12 @@
 <title>FMR Staff ID Badge Generator</title>
 <style>
   :root{
-    --fmr-navy:#042945;      /* background gradient base */
-    --panel:#1e293b;         /* left panel */
-    --bg:#0f172a;            /* page bg */
-    --green:#53b76a;         /* accent */
-    --text:#ffffff;          /* body text */
-    --muted:#94a3b8;         /* secondary */
+    --fmr-navy:#042945;
+    --panel:#1e293b;
+    --bg:#0f172a;
+    --green:#53b76a;
+    --text:#ffffff;
+    --muted:#94a3b8;
     --radius-lg:.6rem; --radius-md:.4rem; --radius-sm:.25rem;
     --font:system-ui,-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
@@ -19,33 +19,34 @@
   /* ====== LAYOUT ====== */
   body{
     margin:0; color:var(--text); background:var(--bg); font-family:var(--font);
-    min-height:100vh; display:grid; grid-template-columns:320px 1fr; gap:1rem; padding:1rem;
+    min-height:100vh; display:grid; grid-template-columns:460px 1fr; gap:1rem; padding:1rem;
   }
   @media (max-width: 900px){ body{ grid-template-columns:1fr; } }
 
   .panel{
     background:var(--panel); border-radius:var(--radius-lg); border:1px solid #47556955;
-    box-shadow:0 30px 60px -10px rgba(0,0,0,.8); display:flex; flex-direction:column; max-width:320px;
+    box-shadow:0 30px 60px -10px rgba(0,0,0,.8); display:flex; flex-direction:column; max-width:460px;
   }
   .panel-header{ padding:1rem 1rem .5rem; border-bottom:1px solid #33415555; }
   .panel-header h1{ margin:0; font-size:1rem; }
   .panel-header p{ margin:.5rem 0 0; font-size:.8rem; color:var(--muted); }
   .panel-body{ padding:1rem; display:grid; gap:1rem; font-size:.85rem; }
-  label{ display:flex; flex-direction:column; gap:.4rem; font-weight:600; font-size:.8rem; }
-  label .hint{ font-weight:400; color:var(--muted); font-size:.7rem; }
+  label{ display:flex; flex-direction:column; gap:.4rem; font-weight:600; font-size:.85rem; }
+  label .hint{ font-weight:400; color:var(--muted); font-size:.75rem; }
   input, select{
+    width:100%;
     background:#0b1324; border:1px solid #475569; color:var(--text); border-radius:var(--radius-md);
-    padding:.55rem .6rem; font:inherit; outline:none;
+    padding:.65rem .7rem; font-size:.95rem; outline:none; text-overflow:ellipsis;
   }
   input:focus, select:focus{ border-color:var(--green); box-shadow:0 0 0 2px #53b76a33; }
   .btn-row{ border-top:1px solid #33415555; padding:1rem; display:flex; gap:.6rem; justify-content:flex-end; }
-  button{ appearance:none; border:0; border-radius:var(--radius-md); cursor:pointer; font-weight:700; font-size:.9rem; padding:.65rem 1rem; }
+  button{ appearance:none; border:0; border-radius:var(--radius-md); cursor:pointer; font-weight:700; font-size:.95rem; padding:.65rem 1rem; }
   #printBtn{ background:var(--green); color:#001513; }
   #clearBtn{ background:transparent; color:var(--muted); border:1px solid #475569; }
 
   .preview-area{ display:grid; grid-template-rows:auto 1fr; gap:1rem; min-width:0; }
   .preview-head h2{ margin:0; font-size:1rem; }
-  .preview-head p{ margin:.2rem 0 0; color:var(--muted); font-size:.8rem; }
+  .preview-head p{ margin:.2rem 0 0; color:var(--muted); font-size:.85rem; }
   .preview-grid{ display:flex; flex-wrap:wrap; gap:1rem; }
 
   /* ====== BADGE BASE ====== */
@@ -82,9 +83,17 @@
 
   /* Code box floating in empty right area */
   .qr-float{ position:absolute; right:.35rem; top:1.0rem; }
-  .qr-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:none; border:1px solid #e2e8f0; }
+  .qr-box{
+    width:1.0in; height:1.0in; background:#fff; border-radius:.15rem;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+    box-shadow:none; border:1px solid #e2e8f0;
+  }
   .qr-box canvas, .qr-box img{ width:100%; height:100%; }
-  .barcode-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:none; align-items:center; justify-content:center; overflow:hidden; box-shadow:none; border:1px solid #e2e8f0; }
+  .barcode-box{
+    width:1.0in; height:1.0in; background:#fff; border-radius:.15rem;
+    display:none; align-items:center; justify-content:center; overflow:hidden;
+    box-shadow:none; border:1px solid #e2e8f0;
+  }
   .barcode-box svg{ width:92%; height:92%; }
 
   /* BACK */
@@ -113,7 +122,9 @@
   <section class="panel">
     <div class="panel-header">
       <h1>FMR Badge Generator</h1>
-      <p>Select an employee, adjust fields if needed, then click <strong>Print Badge</strong>.<br />This page reads <code>employees.json</code> and uses <code>fmr-logo.png</code>.<br />Photos are NOT uploaded; place a physical headshot over the box if you prefer stickers.</p>
+      <p>Select an employee, adjust fields if needed, then click <strong>Print Badge</strong>.<br />
+      This page reads <code>employees.json</code> and uses <code>fmr-logo.png</code>.<br />
+      Photos are NOT uploaded; place a physical headshot over the box if you prefer stickers.</p>
     </div>
     <div class="panel-body">
       <label>
@@ -332,7 +343,6 @@
         photoFallback.textContent = photoText;
         photoFallback.style.display = 'flex';
       }
-
       renderCode();
     }
 
@@ -354,7 +364,7 @@
     // ====== EVENTS ======
     document.getElementById('printBtn').addEventListener('click', () => window.print());
     document.getElementById('clearBtn').addEventListener('click', clearAll);
-    ;[empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
+    [empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
     addrSelect.addEventListener('change', () => { backAddress.textContent = ADDRESSES[addrSelect.value] || ADDRESSES.carson; });
     codeType.addEventListener('change', updatePreview);
 
