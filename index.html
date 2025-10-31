@@ -79,36 +79,39 @@
   .photo-frame img{ position:absolute; left:50%; top:50%; width:100%; height:100%; object-fit:cover; transform:translate(-50%,-50%) scale(1); border-radius:.12rem; }
   #photoFallback{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:.45rem; text-align:center; padding:.2rem; }
 
-  /* NAME/ROLE/ID block sits below the QR */
+  /* NAME/ROLE/ID block sits below the code */
   .id-info{
     display:flex; flex-direction:column; align-self:flex-start;
-    margin-top:0.56in;                     /* adjust 0.54–0.60in to taste */
-    max-width:calc(100% - 1.15in);         /* keep text out from under QR */
+    margin-top:0.50in;                 /* tuned for 0.90" code */
+    max-width:calc(100% - 1.00in);     /* keep text out from under code */
   }
-  /* 1) CSS: keep name on ONE line; JS will auto-shrink so it doesn’t wrap */
+  /* keep on one line; JS will auto-shrink */
   .emp-name{
     font-size:9pt; font-weight:800; line-height:1.06; margin:0 0 .06rem 0;
     white-space:nowrap; overflow:hidden;
   }
-  .emp-role{ font-size:9pt; color:var(--green); margin-top:.04rem; font-weight:700; }
+  .emp-role{
+    font-size:9pt; color:var(--green); margin-top:.04rem; font-weight:700;
+    white-space:nowrap; overflow:hidden;
+  }
   .emp-idline{ font-size:9pt; color:#cbd5e1; margin-top:.04rem; }
 
   .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; color:#cbd5e1; margin-top:.28rem; }
   .dept{ color:#fff; font-weight:800; font-size:.42rem; }
 
-  .qr-float{ position:absolute; right:.35rem; top:1.15rem; }
+  .qr-float{ position:absolute; right:.35rem; top:1.00rem; }        /* slightly higher */
   .qr-box{
-    width:1.0in; height:1.0in; background:#fff; border-radius:.15rem;
+    width:0.90in; height:0.90in; background:#fff; border-radius:.15rem;
     display:flex; align-items:center; justify-content:center; overflow:hidden;
     box-shadow:none; border:1px solid #e2e8f0;
   }
   .qr-box canvas, .qr-box img{ width:100%; height:100%; }
   .barcode-box{
-    width:1.0in; height:1.0in; background:#fff; border-radius:.15rem;
+    width:0.90in; height:0.90in; background:#fff; border-radius:.15rem;
     display:none; align-items:center; justify-content:center; overflow:hidden;
     box-shadow:none; border:1px solid #e2e8f0;
   }
-  .barcode-box svg{ width:92%; height:92%; }
+  .barcode-box svg{ width:96%; height:96%; }
 
   /* BACK */
   .badge-back{ background:#fff; color:#0f172a; border:2px solid #0f172a; display:flex; flex-direction:column; justify-content:space-between; padding:.5rem .5rem .4rem; }
@@ -333,15 +336,13 @@
       }
     }
 
-    // ====== NAME AUTO-FIT (no wrapping) ======
-    // Shrink font size until the element fits one line (no wrap)
+    // ====== ONE-LINE AUTO-FIT ======
     function fitTextToOneLine(el, maxPt=9, minPt=7, step=0.25){
       if (!el) return;
       let size = maxPt;
       el.style.fontSize = size + 'pt';
       el.style.whiteSpace = 'nowrap';
       el.style.overflow = 'hidden';
-      // reduce until it fits or minimum reached
       while (size > minPt && el.scrollWidth > el.clientWidth) {
         size -= step;
         el.style.fontSize = size + 'pt';
@@ -356,9 +357,12 @@
       const officeVal = empOffice.value || SHORT_OFFICE.carson;
       const photoText = empPhotoNote.value || 'STAFF PHOTO';
 
-      outName.textContent = name;            // set text first
-      fitTextToOneLine(outName, 9, 7);       // then force to one line (auto-shrink)
+      outName.textContent = name;
+      fitTextToOneLine(outName, 9, 7);
+
       outRole.textContent = role;
+      fitTextToOneLine(outRole, 9, 6.5);
+
       outIdLine.textContent = `ID: ${theId}`;
       outDept.textContent = 'Pain Management Clinic';
       outOffice.textContent = officeVal;
@@ -391,8 +395,9 @@
       backAddress.textContent = ADDRESSES[key] || ADDRESSES.carson;
       empOffice.value = SHORT_OFFICE[key] || SHORT_OFFICE.carson;
       outOffice.textContent = empOffice.value;
-      fitTextToOneLine(outName, 9, 7);
       updatePreview();
+      fitTextToOneLine(outName, 9, 7);
+      fitTextToOneLine(outRole, 9, 6.5);
     });
 
     // Buttons / inputs
@@ -400,7 +405,10 @@
     document.getElementById('clearBtn').addEventListener('click', clearAll);
     [empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
     codeType.addEventListener('change', updatePreview);
-    window.addEventListener('resize', () => fitTextToOneLine(outName, 9, 7));
+    window.addEventListener('resize', () => {
+      fitTextToOneLine(outName, 9, 7);
+      fitTextToOneLine(outRole, 9, 6.5);
+    });
 
     // Local photo upload
     function setPhotoFromFile(file){
@@ -462,6 +470,7 @@
 
         updatePreview();
         fitTextToOneLine(outName, 9, 7);
+        fitTextToOneLine(outRole, 9, 6.5);
       });
 
       // Initialize defaults
@@ -469,6 +478,7 @@
       backAddress.textContent = ADDRESSES.carson;
       updatePreview();
       fitTextToOneLine(outName, 9, 7);
+      fitTextToOneLine(outRole, 9, 6.5);
     }
     loadEmployees();
 
