@@ -83,9 +83,11 @@
   #photoFallback{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:.45rem; text-align:center; padding:.2rem; }
 
   .id-info{ display:flex; flex-direction:column; }
-  .emp-name{ font-size:14pt; font-weight:800; line-height:1.06; }    /* 14 pt per request */
-  .emp-role{ font-size:.55rem; color:var(--green); margin-top:.1rem; font-weight:700; }
-  .emp-idline{ font-size:.50rem; color:#cbd5e1; margin-top:.25rem; }
+/* === Size tweaks === */
+  .emp-name   { font-size: 10pt !important; line-height: 1.08; }  /* was 14pt */
+  .emp-role   { font-size: 9pt  !important; }                     /* adjust if you want */
+  .emp-idline { font-size: 9pt  !important; }                     /* adjust if you want */
+
 
   .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; color:#cbd5e1; margin-top:.28rem; }
   .dept{ color:#fff; font-weight:800; font-size:.42rem; }
