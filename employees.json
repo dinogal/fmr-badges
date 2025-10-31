@@ -14,7 +14,7 @@
   {
     "id": "208",
     "name": "Nydia Acha",
-    "title": "Administrative Assistant / Back Office Support",
+    "title": "Administrative Assistant/Back Office Support",
     "office": "Carson"
   },
   {
@@ -86,7 +86,7 @@
   {
     "id": "39",
     "name": "Alejandro Estrada",
-    "title": "Front Office Staff/ Medical Assistant",
+    "title": "Front Office Staff/Medical Assistant",
     "office": "Carson"
   },
 {
@@ -103,7 +103,7 @@
   },
   {
     "id": "196",
-    "name": "Ashley Franklin,DC",
+    "name": "Ashley Franklin, DC",
     "title": "Chiropractor",
     "office": "Carson"
   },
@@ -122,7 +122,7 @@
 {
     "id": "70",
     "name": "Arlene Garcia",
-    "title": "Front Office Staff/X-ray Tech",
+    "title": "Front Office Staff/X-Ray Tech",
     "office": "Downey"
   },
   {
@@ -140,7 +140,7 @@
   {
     "id": "239",
     "name": "Evelyn Hernandez",
-    "title": "Front Office Staff/ Medical Assistant",
+    "title": "Front Office Staff/Medical Assistant",
     "office": "Carson"
   },
   {
@@ -196,7 +196,7 @@
   {
     "id": "105",
     "name": "Anay Lara",
-    "title": "Back Office/Medical Scribe",
+    "title": "Back Office Support/Medical Scribe",
     "office": "Downey"
   },
 {
@@ -350,13 +350,13 @@
   {
     "id": "129",
     "name": "Brenda Torres",
-    "title": "Back Office Staff",
+    "title": "Back Office Support",
     "office": "West Covina"
   },
 {
     "id": "264",
     "name": "Dominic Vasquez",
-    "title": "Back Office Staff",
+    "title": "Back Office Support",
     "office": "West Covina"
   },
   {
@@ -368,7 +368,7 @@
   {
     "id": "251",
     "name": "Jeremy Vega",
-    "title": "Back Office Staff",
+    "title": "Back Office Support",
     "office": "Carson"
   },
   {
@@ -380,7 +380,7 @@
   {
     "id": "254",
     "name": "Rebecca Weber",
-    "title": "X-ray Tech",
+    "title": "X-Ray Tech",
     "office": "Carson"
   },
   {
@@ -390,5 +390,6 @@
     "office": "Koreatown"
   }
 ]
+
 
 
