@@ -242,69 +242,151 @@
     "office": "All Offices"
   },
   {
-    "id": "64",
-    "name": "Adrianna Gutierrez",
-    "title": "Back Office Support/Medical Scribe",
-    "office": "West Covina"
-  },
-  {
-    "id": "239",
-    "name": "Evelyn Hernandez",
-    "title": "Front Office Staff/ Medical Assistant",
+    "id": "188",
+    "name": "Yulianna Martinez",
+    "title": "Back Office Support",
     "office": "Carson"
   },
   {
-    "id": "184",
-    "name": "Jaime Herrera",
-    "title": "Back Office Support",
+    "id": "157",
+    "name": "Christene 'Tena' McLarty, FNP-C, PMHNP-C",
+    "title": "Psychiatric Mental Health Nurse Practitioner",
+    "office": "Carson"
+  },
+  {
+    "id": "162",
+    "name": "Jenny Mejia",
+    "title": "X-Ray Tech",
     "office": "Downey"
   },
 
   {
-    "id": "211",
-    "name": "Lindsay Holliday Navas",
-    "title": "Medical Scribe",
+    "id": "189",
+    "name": "Christian Morante",
+    "title": "Back Office Support",
     "office": "Carson"
   },
   {
-    "id": "258",
-    "name": "Noah Huh",
-    "title": "Medical Scribe",
+    "id": "244",
+    "name": "Victoria Munoz",
+    "title": "Front Office Staff",
     "office": "West Covina"
   },
 {
-    "id": "50",
-    "name": "Tanya Imonti",
-    "title": "Operations Manager",
-    "office": "All Offices"
+    "id": "232",
+    "name": "Bailey Nantais",
+    "title": "Medical Scribe",
+    "office": "Downey"
   },
   {
-    "id": "246",
-    "name": "Rafaela Jasso",
+    "id": "110",
+    "name": "Diana Nunez",
+    "title": "Physical Therapist Aide",
+    "office": "Carson"
+  },
+  {
+    "id": "228",
+    "name": "Claudio Pazarin",
     "title": "Back Office Support",
     "office": "Carson"
   },
   {
-    "id": "265",
-    "name": "Emily Jweinat-Medina",
-    "title": "Physical Therapist Aide",
-    "office": "West Covina"
-  },
-  {
-    "id": "163",
-    "name": "Nhi Kim, FNP-C",
-    "title": "Nurse Practitioner ",
+    "id": "248",
+    "name": "Jan Miguella Perancullo",
+    "title": "Medical Scribe",
     "office": "Carson"
   },
   {
-    "id": "220",
-    "name": "Monika King",
+    "id": "155",
+    "name": "Maggie Pezeshkian, DC",
     "title": "Chiropractor",
+    "office": "West Covina"
+  },
+
+  {
+    "id": "195",
+    "name": "Vivian Pham, FNP-BC",
+    "title": "Nurse Practitioner",
+    "office": "All Offices"
+  },
+{
+    "id": "214",
+    "name": "Berenice Ramirez Rodriguez",
+    "title": "Front Office Staff",
+    "office": "Downey"
+  },
+  {
+    "id": "205",
+    "name": "Elizabeth Rodriguez",
+    "title": "Front Office Staff",
+    "office": "West Covina"
+  },
+  {
+    "id": "222",
+    "name": "Leland Slu",
+    "title": "Medical Scribe",
+    "office": "West Covina"
+  },
+  {
+    "id": "112",
+    "name": "Janette Tawfek",
+    "title": "Acupuncture Aide",
+    "office": "Carson"
+  },
+  {
+    "id": "257",
+    "name": "Kate Thompson",
+    "title": "Medical Scribe",
     "office": "Downey"
   },
 
+  {
+    "id": "219",
+    "name": "Jaime Tojos, DC",
+    "title": "Chiropractor",
+    "office": "West Covina"
+  },
 
-
-
-
+  {
+    "id": "129",
+    "name": "Brenda Torres",
+    "title": "Back Office Staff",
+    "office": "West Covina"
+  },
+{
+    "id": "264",
+    "name": "Dominic Vasquez",
+    "title": "Back Office Staff",
+    "office": "West Covina"
+  },
+  {
+    "id": "113",
+    "name": "Eddie Vasquez",
+    "title": "Manager
+    "office": "West Covina"
+  },
+  {
+    "id": "251",
+    "name": "Jeremy Vega",
+    "title": "Back Office Staff",
+    "office": "Carson"
+  },
+  {
+    "id": "169",
+    "name": "Margaret 'Meggie' Waruiru, AFACNP-C",
+    "title": "Nurse Practitioner",
+    "office": "Downey"
+  },
+  {
+    "id": "254",
+    "name": "Rebecca Weber",
+    "title": "X-ray Tech",
+    "office": "Carson"
+  },
+  {
+    "id": "255",
+    "name": "Janice Youn",
+    "title": "Front Office Staff",
+    "office": "Koreatown"
+  }
 ]
