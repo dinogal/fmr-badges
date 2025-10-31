@@ -81,15 +81,21 @@
   .photo-frame img{ position:absolute; left:50%; top:50%; width:100%; height:100%; object-fit:cover; transform:translate(-50%,-50%) scale(1); border-radius:.12rem; }
   #photoFallback{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:.45rem; text-align:center; padding:.2rem; }
 
-  .id-info{ display:flex; flex-direction:column; align-self:flex-start; margin-top:-0.10in; }
-  .emp-name{ font-size:9pt; font-weight:800; line-height:1.06; margin:0 0 .06rem 0; }
+  /* --- TEXT BLOCK (name/role/id) BELOW THE QR --- */
+  .id-info{
+    display:flex; flex-direction:column; align-self:flex-start;
+    /* Start below the QR: 1.0in tall QR + a small gutter */
+    margin-top:1.05in;                       /* adjust 0.95–1.10in to taste */
+    max-width:calc(100% - 1.25in);           /* avoid flowing under the QR (1.0in + ~0.25in gutter) */
+  }
+  .emp-name{ font-size:11pt; font-weight:800; line-height:1.06; margin:0 0 .06rem 0; }
   .emp-role{ font-size:9pt; color:var(--green); margin-top:.04rem; font-weight:700; }
   .emp-idline{ font-size:9pt; color:#cbd5e1; margin-top:.04rem; }
 
   .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; color:#cbd5e1; margin-top:.28rem; }
   .dept{ color:#fff; font-weight:800; font-size:.42rem; }
 
-  .qr-float{ position:absolute; right:.35rem; top:1.15rem; }
+  .qr-float{ position:absolute; right:.35rem; top:1.15rem; } /* QR position */
   .qr-box{
     width:1.0in; height:1.0in; background:#fff; border-radius:.15rem;
     display:flex; align-items:center; justify-content:center; overflow:hidden;
@@ -316,11 +322,11 @@
     // ====== QR / BARCODE ======
     function buildQrPayload(){
       const name = employeeSelect.value || 'Employee';
-      const idVal = empId.value || '###';
+      theId = empId.value || '###';
       const title = empRole.value || 'Clinical Assistant';
       const office = (empOffice.value || SHORT_OFFICE.carson).replace(/,/g, '');
       const today = new Date().toISOString().slice(0,10);
-      return `FMR|${idVal}|${name}|${title}|${office}|${today}`;
+      return `FMR|${theId}|${name}|${title}|${office}|${today}`;
     }
     function renderQR(){
       const payload = buildQrPayload();
@@ -385,8 +391,8 @@
     addrSelect.addEventListener('change', () => {
       const key = addrSelect.value;
       backAddress.textContent = ADDRESSES[key] || ADDRESSES.carson;
-      empOffice.value = SHORT_OFFICE[key] || SHORT_OFFICE.carson;  // mirror to input
-      outOffice.textContent = empOffice.value;                      // mirror to front
+      empOffice.value = SHORT_OFFICE[key] || SHORT_OFFICE.carson;
+      outOffice.textContent = empOffice.value;
       updatePreview();
     });
 
@@ -451,7 +457,6 @@
         else if(office.includes('west covina') || office.includes('westcovina')) addrSelect.value = 'westcovina';
         else if(office.includes('koreatown') || office.includes('korea town'))    addrSelect.value = 'koreatown';
 
-        // Mirror to back and front
         const key = addrSelect.value;
         backAddress.textContent = ADDRESSES[key];
         empOffice.value = SHORT_OFFICE[key];
