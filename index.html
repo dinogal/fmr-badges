@@ -12,7 +12,7 @@
     --green:#53b76a;
     --text:#ffffff;
     --muted:#94a3b8;
-    --radius-lg:.6rem; --radius-md:.4rem; --radius-sm:.25rem;
+    --radius-lg:.6rem; --radius-md:.4rem;
     --font:system-ui,-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
 
@@ -24,7 +24,7 @@
   @media (max-width: 900px){ body{ grid-template-columns:1fr; } }
 
   .panel{
-    background:var(--panel); border-radius:var(--radius-lg); border:1px solid #47556955;
+    background:var(--panel); border-radius:.6rem; border:1px solid #47556955;
     box-shadow:0 30px 60px -10px rgba(0,0,0,.8); display:flex; flex-direction:column; max-width:460px;
   }
   .panel-header{ padding:1rem 1rem .5rem; border-bottom:1px solid #33415555; }
@@ -34,13 +34,12 @@
   label{ display:flex; flex-direction:column; gap:.4rem; font-weight:600; font-size:.85rem; }
   label .hint{ font-weight:400; color:var(--muted); font-size:.75rem; }
   input, select{
-    width:100%;
-    background:#0b1324; border:1px solid #475569; color:var(--text); border-radius:var(--radius-md);
-    padding:.65rem .7rem; font-size:.95rem; outline:none; text-overflow:ellipsis;
+    width:100%; background:#0b1324; border:1px solid #475569; color:var(--text);
+    border-radius:.4rem; padding:.65rem .7rem; font-size:.95rem; outline:none; text-overflow:ellipsis;
   }
   input:focus, select:focus{ border-color:var(--green); box-shadow:0 0 0 2px #53b76a33; }
   .btn-row{ border-top:1px solid #33415555; padding:1rem; display:flex; gap:.6rem; justify-content:flex-end; flex-wrap:wrap; }
-  button{ appearance:none; border:0; border-radius:var(--radius-md); cursor:pointer; font-weight:700; font-size:.95rem; padding:.65rem 1rem; }
+  button{ appearance:none; border:0; border-radius:.4rem; cursor:pointer; font-weight:700; font-size:.95rem; padding:.65rem 1rem; }
   #printBtn{ background:var(--green); color:#001513; }
   #clearBtn{ background:transparent; color:#a3b2c8; border:1px solid #475569; }
   #printFrontBtn, #printBackBtn{ background:#0ea5e9; color:#00121a; }
@@ -73,31 +72,31 @@
 
   .front-body{ display:grid; grid-template-columns:auto 1fr; gap:.45rem; align-items:flex-start; margin-top:.10rem; }
   .photo-frame{
-    width:1in; height:1.25in;
-    background:transparent; border:none; border-radius:.15rem; position:relative;
-    margin-bottom:.50in; /* keep photo 1/2″ above the bottom edge */
+    width:1in; height:1.25in; background:transparent; border:none; border-radius:.15rem; position:relative;
+    margin-bottom:.50in; /* keep photo 1/2″ above bottom edge */
   }
   .photo-wrap{ position:absolute; inset:.04in .04in .06in .04in; overflow:hidden; border-radius:.12rem; }
   .photo-frame img{ position:absolute; left:50%; top:50%; width:100%; height:100%; object-fit:cover; transform:translate(-50%,-50%) scale(1); border-radius:.12rem; }
   #photoFallback{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:.45rem; text-align:center; padding:.2rem; }
 
-  /* --- TEXT BLOCK (name/role/id) BELOW THE QR --- */
-  /* === Put name/role/ID just below the QR, but keep it visible === */
-.id-info{
-  margin-top: 0.48in !important;   /* was 1.05in; adjust 0.65–0.80in to taste */
-  max-width: calc(100% - 1.15in) !important;  /* keep text out from under the QR */
-}
-/* make sure the grid doesn't fight our offset */
-.front-body{ align-items: flex-start !important; }
-
-  .emp-name{ font-size:10pt; font-weight:800; line-height:1.06; margin:0 0 .06rem 0; }
-  .emp-role{ font-size:8pt; color:var(--green); margin-top:.04rem; font-weight:700; }
-  .emp-idline{ font-size:8pt; color:#cbd5e1; margin-top:.04rem; }
+  /* NAME/ROLE/ID block sits below the QR */
+  .id-info{
+    display:flex; flex-direction:column; align-self:flex-start;
+    margin-top:0.56in;                     /* adjust 0.54–0.60in to taste */
+    max-width:calc(100% - 1.15in);         /* keep text out from under QR */
+  }
+  /* 1) CSS: keep name on ONE line; JS will auto-shrink so it doesn’t wrap */
+  .emp-name{
+    font-size:9pt; font-weight:800; line-height:1.06; margin:0 0 .06rem 0;
+    white-space:nowrap; overflow:hidden;
+  }
+  .emp-role{ font-size:9pt; color:var(--green); margin-top:.04rem; font-weight:700; }
+  .emp-idline{ font-size:9pt; color:#cbd5e1; margin-top:.04rem; }
 
   .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; color:#cbd5e1; margin-top:.28rem; }
   .dept{ color:#fff; font-weight:800; font-size:.42rem; }
 
-  .qr-float{ position:absolute; right:.35rem; top:1.15rem; } /* QR position */
+  .qr-float{ position:absolute; right:.35rem; top:1.15rem; }
   .qr-box{
     width:1.0in; height:1.0in; background:#fff; border-radius:.15rem;
     display:flex; align-items:center; justify-content:center; overflow:hidden;
@@ -121,7 +120,7 @@
   .label{ font-weight:800; color:#000; }
   .back-footer{ font-size:.35rem; color:#475569; border-top:1px solid #94a3b8; padding-top:.3rem; }
 
-  /* ====== PRINT ====== */
+  /* PRINT */
   @media print{
     @page { size: 3.375in 2.125in; margin: 0; }
     body.print-front .badge-back { display: none !important; }
@@ -137,37 +136,24 @@
 </head>
 <body>
 
-  <!-- ====== LEFT CONTROL PANEL ====== -->
+  <!-- LEFT CONTROL PANEL -->
   <section class="panel">
     <div class="panel-header">
       <h1>FMR Badge Generator</h1>
       <p>Select an employee, adjust fields if needed, then click <strong>Print</strong>.<br />
       This page reads <code>employees.json</code> and uses <code>fmr-logo.png</code>.<br />
-      Photos are NOT uploaded; local FileReader renders them just for printing.</p>
+      Photos are NOT uploaded; local FileReader renders them for printing only.</p>
     </div>
     <div class="panel-body">
-      <label>
-        Employee <span class="hint">Dropdown is loaded from employees.json</span>
+      <label>Employee <span class="hint">Dropdown is loaded from employees.json</span>
         <select id="employeeSelect"></select>
       </label>
 
-      <label>
-        ID #
-        <input id="empId" placeholder="###" />
-      </label>
+      <label>ID #<input id="empId" placeholder="###" /></label>
+      <label>Title / Role<input id="empRole" placeholder="Clinical Assistant" /></label>
+      <label>Office / Site<input id="empOffice" placeholder="Carson, CA" /></label>
 
-      <label>
-        Title / Role
-        <input id="empRole" placeholder="Clinical Assistant" />
-      </label>
-
-      <label>
-        Office / Site
-        <input id="empOffice" placeholder="Carson, CA" />
-      </label>
-
-      <label>
-        Back of badge address
+      <label>Back of badge address
         <select id="addrSelect">
           <option value="carson" selected>Carson – 20620 Leapwood Ave Unit H, Carson, CA 90746</option>
           <option value="downey">Downey – 12115 Paramount Blvd, Downey, CA 90242</option>
@@ -176,23 +162,20 @@
         </select>
       </label>
 
-      <label>
-        Code type
+      <label>Code type
         <select id="codeType">
           <option value="qr" selected>QR Code</option>
           <option value="barcode">Barcode (Code128)</option>
         </select>
       </label>
 
-      <label>
-        Upload headshot (local only)
+      <label>Upload headshot (local only)
         <span class="hint">Image stays in your browser; not uploaded anywhere</span>
         <input id="photoInput" type="file" accept="image/*" />
       </label>
 
-      <label>
-        Photo note
-        <span class="hint">Printed badge shows this text if no photo is loaded</span>
+      <label>Photo note
+        <span class="hint">Shows if no photo is loaded</span>
         <input id="empPhotoNote" placeholder="STAFF PHOTO" />
       </label>
     </div>
@@ -204,7 +187,7 @@
     </div>
   </section>
 
-  <!-- ====== RIGHT PREVIEW AREA ====== -->
+  <!-- RIGHT PREVIEW AREA -->
   <section class="preview-area">
     <div class="preview-head">
       <h2>Preview</h2>
@@ -215,12 +198,10 @@
       <!-- FRONT -->
       <section class="badge badge-front" id="badgeFront">
         <div class="front-header">
-          <div class="logo-wrap">
-            <img src="fmr-logo.png" alt="FMR Logo" />
-          </div>
+          <div class="logo-wrap"><img src="fmr-logo.png" alt="FMR Logo" /></div>
           <div class="clinic-text">
             INTERVENTIONAL QUALITY<br/>PAIN MANAGEMENT
-            <small>F. Marina Russman, MD</small>
+            <small>F. MARINA RUSSMAN, MD</small>
           </div>
         </div>
 
@@ -245,7 +226,6 @@
           </div>
         </div>
 
-        <!-- Code image (QR or barcode) -->
         <div class="qr-float">
           <div id="qrBox" class="qr-box"></div>
           <div id="barcodeBox" class="barcode-box"><svg id="barcode"></svg></div>
@@ -274,7 +254,7 @@
     </div>
   </section>
 
-  <!-- QR + Barcode libraries (MIT) -->
+  <!-- QR + Barcode libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
 
@@ -324,7 +304,7 @@
     // ====== QR / BARCODE ======
     function buildQrPayload(){
       const name = employeeSelect.value || 'Employee';
-      theId = empId.value || '###';
+      const theId = empId.value || '###';
       const title = empRole.value || 'Clinical Assistant';
       const office = (empOffice.value || SHORT_OFFICE.carson).replace(/,/g, '');
       const today = new Date().toISOString().slice(0,10);
@@ -353,6 +333,21 @@
       }
     }
 
+    // ====== NAME AUTO-FIT (no wrapping) ======
+    // Shrink font size until the element fits one line (no wrap)
+    function fitTextToOneLine(el, maxPt=9, minPt=7, step=0.25){
+      if (!el) return;
+      let size = maxPt;
+      el.style.fontSize = size + 'pt';
+      el.style.whiteSpace = 'nowrap';
+      el.style.overflow = 'hidden';
+      // reduce until it fits or minimum reached
+      while (size > minPt && el.scrollWidth > el.clientWidth) {
+        size -= step;
+        el.style.fontSize = size + 'pt';
+      }
+    }
+
     // ====== PREVIEW UPDATE ======
     function updatePreview(){
       const name = employeeSelect.value || 'Employee Name';
@@ -361,7 +356,8 @@
       const officeVal = empOffice.value || SHORT_OFFICE.carson;
       const photoText = empPhotoNote.value || 'STAFF PHOTO';
 
-      outName.textContent = name;
+      outName.textContent = name;            // set text first
+      fitTextToOneLine(outName, 9, 7);       // then force to one line (auto-shrink)
       outRole.textContent = role;
       outIdLine.textContent = `ID: ${theId}`;
       outDept.textContent = 'Pain Management Clinic';
@@ -389,22 +385,24 @@
       updatePreview();
     }
 
-    // Keep front office text in sync when the address dropdown changes
+    // Sync office text with address dropdown
     addrSelect.addEventListener('change', () => {
       const key = addrSelect.value;
       backAddress.textContent = ADDRESSES[key] || ADDRESSES.carson;
       empOffice.value = SHORT_OFFICE[key] || SHORT_OFFICE.carson;
       outOffice.textContent = empOffice.value;
+      fitTextToOneLine(outName, 9, 7);
       updatePreview();
     });
 
-    // ====== EVENTS ======
+    // Buttons / inputs
     document.getElementById('printBtn').addEventListener('click', () => window.print());
     document.getElementById('clearBtn').addEventListener('click', clearAll);
     [empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
     codeType.addEventListener('change', updatePreview);
+    window.addEventListener('resize', () => fitTextToOneLine(outName, 9, 7));
 
-    // Local photo upload (stays in browser)
+    // Local photo upload
     function setPhotoFromFile(file){
       if(!file) return;
       const reader = new FileReader();
@@ -414,12 +412,10 @@
       };
       reader.readAsDataURL(file);
     }
-    if (photoInput) {
-      photoInput.addEventListener('change', (e) => {
-        const file = e.target.files && e.target.files[0];
-        setPhotoFromFile(file);
-      });
-    }
+    photoInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      setPhotoFromFile(file);
+    });
 
     // ====== LOAD EMPLOYEES ======
     async function loadEmployees(){
@@ -465,12 +461,14 @@
         outOffice.textContent = SHORT_OFFICE[key];
 
         updatePreview();
+        fitTextToOneLine(outName, 9, 7);
       });
 
       // Initialize defaults
       empOffice.value = SHORT_OFFICE.carson;
       backAddress.textContent = ADDRESSES.carson;
       updatePreview();
+      fitTextToOneLine(outName, 9, 7);
     }
     loadEmployees();
 
