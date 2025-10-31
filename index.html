@@ -49,10 +49,11 @@
   }
   .panel-header h1{
     margin:0;
-    font-size:.9rem;
-    font-weight:600;
+    font-size:.95rem;
+    font-weight:700;
     line-height:1.3;
     color:var(--text-main);
+    letter-spacing:.2px;
   }
   .panel-header p{
     margin:.4rem 0 0;
@@ -71,7 +72,7 @@
     display:flex;
     flex-direction:column;
     font-size:.7rem;
-    font-weight:500;
+    font-weight:600;
     color:var(--text-main);
     line-height:1.2;
   }
@@ -97,11 +98,7 @@
     border-color:var(--fmr-green);
     box-shadow:0 0 0 2px #53b76a33;
   }
-  .two-col{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:.75rem;
-  }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
   .btn-row{
     border-top:1px solid #33415555;
     background:#02061755;
@@ -119,265 +116,78 @@
     background:var(--fmr-green);
     color:#0a0f1f;
     font-size:.8rem;
-    font-weight:600;
+    font-weight:700;
     line-height:1.2;
     padding:.6rem .9rem;
     cursor:pointer;
     box-shadow:0 20px 30px -8px rgba(83,183,106,.45);
   }
-  button.sec{
-    background:transparent;
-    color:var(--text-dim);
-    border:1px solid #475569;
-    box-shadow:none;
-  }
+  button.sec{ background:transparent; color:var(--text-dim); border:1px solid #475569; box-shadow:none; }
 
   /* right preview area */
-  .preview-area{
-    display:grid;
-    grid-template-rows:auto 1fr;
-    gap:1rem;
-  }
-  .preview-head{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    align-items:flex-end;
-  }
-  .preview-head h2{
-    margin:0;
-    font-size:.9rem;
-    font-weight:600;
-    color:var(--text-main);
-  }
-  .preview-head p{
-    margin:.25rem 0 0;
-    font-size:.7rem;
-    color:var(--text-dim);
-  }
+  .preview-area{ display:grid; grid-template-rows:auto 1fr; gap:1rem; }
+  .preview-head{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; }
+  .preview-head h2{ margin:0; font-size:.95rem; font-weight:700; color:var(--text-main); }
+  .preview-head p{ margin:.25rem 0 0; font-size:.7rem; color:var(--text-dim); }
 
-  .preview-grid{
-    display:flex;
-    flex-wrap:wrap;
-    gap:1rem;
-  }
+  .preview-grid{ display:flex; flex-wrap:wrap; gap:1rem; }
 
   /* badge base shared */
   .badge{
-    width:3.375in;
-    height:2.125in;
-    border-radius:.4rem;
-    box-sizing:border-box;
+    width:3.375in; height:2.125in;
+    border-radius:.4rem; box-sizing:border-box;
     box-shadow:0 25px 40px -10px rgba(0,0,0,.8);
-    position:relative;
-    border:2px solid #0f172a;
-    overflow:hidden;
-    font-family:var(--font);
+    position:relative; border:2px solid #0f172a; overflow:hidden; font-family:var(--font);
   }
-  .slot{
-    position:absolute;
-    top:.25rem;
-    left:50%;
-    transform:translateX(-50%);
-    width:.6in;
-    height:.12in;
-    background:#1e293b;
-    border-radius:.08in;
-    border:2px solid #0f172a;
-    box-shadow:0 5px 10px rgba(0,0,0,.8);
-  }
+  /* Hide the slot/hole entirely */
+  .slot{ display:none; }
 
   /* front */
   .badge-front{
     background:
-      radial-gradient(circle at 30% 20%, rgba(83,183,106,.18) 0%, transparent 60%),
-      radial-gradient(circle at 70% 80%, rgba(0,75,135,.4) 0%, transparent 70%),
+      radial-gradient(circle at 28% 18%, rgba(83,183,106,.18) 0%, transparent 60%),
+      radial-gradient(circle at 72% 78%, rgba(0,75,135,.42) 0%, transparent 70%),
       var(--fmr-navy);
-    color:#fff;
-    display:grid;
-    grid-template-rows:auto 1fr auto;
-    padding:.45rem .5rem;
+    color:#fff; display:grid; grid-template-rows:auto 1fr auto; padding:.48rem .5rem;
   }
-  .front-header{
-    display:flex;
-    gap:.4rem;
-    align-items:flex-start;
-  }
-  .logo-wrap{
-    flex:0 0 auto;
-    width:1.0in;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-  }
-  .logo-wrap img{
-    max-width:100%;
-    max-height:.9in;
-    object-fit:contain;
-  }
-  .clinic-text{
-    font-size:.42rem;
-    line-height:1.3;
-    font-weight:500;
-    text-transform:uppercase;
-    letter-spacing:.03em;
-    color:#fff;
-  }
-  .clinic-text small{
-    display:block;
-    font-size:.36rem;
-    font-weight:400;
-    color:#cbd5e1;
-    line-height:1.2;
-    margin-top:.15rem;
-    font-style:italic;
-    text-transform:none;
-    letter-spacing:0;
-  }
+  .front-header{ display:flex; gap:.4rem; align-items:flex-start; }
+  .logo-wrap{ flex:0 0 auto; width:1.0in; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .logo-wrap img{ max-width:100%; max-height:.9in; object-fit:contain; }
+  .clinic-text{ font-size:.42rem; line-height:1.3; font-weight:600; text-transform:uppercase; letter-spacing:.03em; color:#fff; }
+  .clinic-text small{ display:block; font-size:.36rem; font-weight:400; color:#cbd5e1; line-height:1.2; margin-top:.15rem; font-style:italic; text-transform:none; letter-spacing:0; }
 
-  .front-body{
-    display:grid;
-    grid-template-columns:auto 1fr;
-    gap:.4rem;
-    align-items:center;
-    margin-top:.25rem;
-  }
-  .photo-frame{
-    width:.9in;
-    height:1.1in;
-    background:#0f172a;
-    border:2px solid #1e293b;
-    border-radius:.3rem;
-    box-shadow:0 15px 25px rgba(0,0,0,.7);
-    color:#94a3b8;
-    font-size:.45rem;
-    line-height:1.2;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:.25rem;
-  }
-  .id-info{
-    display:flex;
-    flex-direction:column;
-    line-height:1.2;
-  }
-  .emp-name{
-    font-size:.6rem;
-    font-weight:600;
-    color:#fff;
-  }
-  .emp-role{
-    font-size:.45rem;
-    font-weight:500;
-    color:var(--fmr-green);
-    margin-top:.15rem;
-  }
-  .emp-idline{
-    font-size:.4rem;
-    color:#cbd5e1;
-    margin-top:.3rem;
-  }
+  .front-body{ display:grid; grid-template-columns:auto 1fr; gap:.45rem; align-items:center; margin-top:.2rem; }
+  .photo-frame{ width:2in; height:2in; background:#0f172a; border:2px solid #1e293b; border-radius:.15rem; /* removed shadow for flat look */ color:#94a3b8; font-size:.45rem; line-height:1.2; display:flex; align-items:center; justify-content:center; text-align:center; padding:.25rem; }
+  .id-info{ display:flex; flex-direction:column; line-height:1.2; position:relative; z-index:1; }
+  .emp-name{ font-size:.62rem; font-weight:700; color:#fff; white-space:normal; }
+  .emp-role{ font-size:.46rem; font-weight:600; color:var(--fmr-green); margin-top:.15rem; }
+  .emp-idline{ font-size:.4rem; color:#cbd5e1; margin-top:.3rem; }
 
-  .front-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    font-size:.38rem;
-    line-height:1.3;
-    color:#cbd5e1;
-    margin-top:.3rem;
-  }
-  .dept{
-    color:#fff;
-    font-weight:500;
-    font-size:.4rem;
-  }
-  .barcode-box{
-    background:#fff;
-    color:#000;
-    border-radius:.15rem;
-    padding:.1rem .2rem;
-    font-size:.4rem;
-    font-weight:600;
-    line-height:1;
-    min-width:.8in;
-    text-align:center;
-  }
+  .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; line-height:1.3; color:#cbd5e1; margin-top:.28rem; }
+  .dept{ color:#fff; font-weight:600; font-size:.4rem; }
+
+  /* QR box on front */
+  .qr-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 8px 18px rgba(0,0,0,.35); } .qr-box canvas, .qr-box img{ width:100%; height:100%; } .qr-float{ position:absolute; right:.35rem; top:1.0rem; }
+  .qr-box canvas, .qr-box img{ width:100%; height:100%; }
 
   /* back */
-  .badge-back{
-    background:#fff;
-    color:#0f172a;
-    border:2px solid #0f172a;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:.5rem .5rem .4rem;
-    font-family:var(--font);
-  }
-  .back-header{
-    font-size:.5rem;
-    font-weight:600;
-    line-height:1.3;
-    color:#042945;
-    text-align:left;
-  }
-  .clinic-name{
-    text-transform:uppercase;
-    letter-spacing:.04em;
-  }
-  .md-line{
-    font-size:.45rem;
-    font-weight:400;
-    color:#2563eb;
-  }
-  .back-hdr-extra{
-    margin-top:.3rem;
-    font-size:.45rem;
-    font-weight:400;
-    color:#1e293b;
-    line-height:1.4;
-  }
-  .back-body{
-    font-size:.4rem;
-    line-height:1.4;
-    color:#1e293b;
-  }
-  .label{
-    font-weight:600;
-    color:#000;
-  }
-  .back-footer{
-    font-size:.35rem;
-    line-height:1.4;
-    color:#475569;
-    border-top:1px solid #94a3b8;
-    padding-top:.3rem;
-  }
+  .badge-back{ background:#fff; color:#0f172a; border:2px solid #0f172a; display:flex; flex-direction:column; justify-content:space-between; padding:.5rem .5rem .4rem; font-family:var(--font); }
+  .back-header{ font-size:.5rem; font-weight:700; line-height:1.3; color:#042945; text-align:left; }
+  .clinic-name{ text-transform:uppercase; letter-spacing:.04em; }
+  .md-line{ font-size:.45rem; font-weight:500; color:#2563eb; }
+  .back-hdr-extra{ margin-top:.3rem; font-size:.45rem; font-weight:500; color:#1e293b; line-height:1.4; }
+  .back-body{ font-size:.4rem; line-height:1.45; color:#1e293b; }
+  .label{ font-weight:700; color:#000; }
+  .back-footer{ font-size:.35rem; line-height:1.4; color:#475569; border-top:1px solid #94a3b8; padding-top:.3rem; }
 
   /* PRINT MODE */
   @media print{
-    body{
-      background:#fff;
-      color:#000;
-      display:block;
-      padding:0;
-      margin:0;
-    }
+    body{ background:#fff; color:#000; display:block; padding:0; margin:0; }
     .panel{display:none !important;}
-    .preview-area{
-      margin:1rem;
-    }
+    .preview-area{ margin:1rem; }
     .preview-head{display:none !important;}
-    .preview-grid{
-      display:flex;
-      flex-wrap:wrap;
-      gap:1rem;
-    }
-    .badge{page-break-inside:avoid;}
+    .preview-grid{ display:flex; flex-wrap:wrap; gap:1rem; }
+    .badge{ page-break-inside:avoid; }
   }
 </style>
 </head>
@@ -387,27 +197,19 @@
 <section class="panel">
   <div class="panel-header">
     <h1>FMR Badge Generator</h1>
-    <p>Select an employee, fill expiration date, then click Print Badge. Commit this file + employees.json + fmr-logo.png to a GitHub Pages repo to share with the clinic.</p>
+    <p>Select an employee, adjust fields if needed, then click <strong>Print Badge</strong>. This page reads <code>employees.json</code> and uses <code>fmr-logo.png</code>. Photos are NOT uploaded; place a physical headshot over the “STAFF PHOTO” box before lamination.</p>
   </div>
   <div class="panel-body">
 
     <label>
-      Employee
-      <span class="hint">Pulled from employees.json</span>
+      Employee <span class="hint">Dropdown is loaded from employees.json</span>
       <select id="employeeSelect"></select>
     </label>
 
-    <div class="two-col">
-      <label>
-        ID #
-        <input id="empId" placeholder="###" />
-      </label>
-      <label>
-        Expires
-        <span class="hint">ex: 12/31/2026</span>
-        <input id="empExp" placeholder="MM/DD/YYYY" />
-      </label>
-    </div>
+    <label>
+      ID #
+      <input id="empId" placeholder="###" />
+    </label>
 
     <label>
       Title / Role
@@ -420,19 +222,23 @@
     </label>
 
     <label>
-      Barcode / Internal Code
-      <input id="empBarcode" placeholder="FMR-042" />
+      Back of badge address
+      <select id="addrSelect">
+        <option value="carson" selected>Carson – 20620 Leapwood Ave Unit H, Carson, CA 90746</option>
+        <option value="downey">Downey – 12115 Paramount Blvd, Downey, CA 90242</option>
+        <option value="westcovina">West Covina – 1900 W Garvey Ave South, Suite 223, West Covina, CA 91790</option>
+      </select>
     </label>
 
     <label>
       Photo note
-      <span class="hint">This preview just shows a gray box. Attach actual photo when you print/laminate.</span>
+      <span class="hint">Printed badge shows this text box; you’ll place a real headshot sticker over it</span>
       <input id="empPhotoNote" placeholder="STAFF PHOTO" />
     </label>
 
   </div>
   <div class="btn-row">
-    <button id="printBtn" title="Opens system print dialog">Print Badge</button>
+    <button id="printBtn" title="Opens print dialog">Print Badge</button>
     <button class="sec" id="clearBtn" title="Reset fields">Clear</button>
   </div>
 </section>
@@ -442,7 +248,7 @@
   <div class="preview-head">
     <div>
       <h2>Preview</h2>
-      <p>This is exactly what will print (front + back).</p>
+      <p>Front (left) and back (right) — actual CR80 size (3.375in × 2.125in).</p>
     </div>
   </div>
 
@@ -450,12 +256,13 @@
 
     <!-- FRONT OF BADGE -->
     <section class="badge badge-front" id="badgeFront">
-      <div class="slot"></div>
       <div class="front-header">
         <div class="logo-wrap">
-          <!-- IMPORTANT: ensure fmr-logo.png is in same repo -->
+          <!-- Ensure fmr-logo.png is in repo root -->
           <img src="fmr-logo.png" alt="FMR Logo" />
         </div>
+      <!-- Floating QR on empty right side -->
+      <div class="qr-float"><div id="qrBox" class="qr-box"></div></div>
         <div class="clinic-text">
           INTERVENTIONAL QUALITY<br/>PAIN MANAGEMENT
           <small>F. Marina Russman, MD</small>
@@ -467,7 +274,7 @@
         <div class="id-info">
           <div class="emp-name" id="outName">Employee Name</div>
           <div class="emp-role" id="outRole">Clinical Assistant</div>
-          <div class="emp-idline" id="outIdLine">ID: ### • EXP: MM/DD/YYYY</div>
+          <div class="emp-idline" id="outIdLine">ID: ###</div>
         </div>
       </div>
 
@@ -476,7 +283,7 @@
           <div class="dept" id="outDept">Pain Management Clinic</div>
           <div id="outOffice">Carson, CA</div>
         </div>
-        <div class="barcode-box" id="outBarcode">FMR-###</div>
+        
       </div>
     </section>
 
@@ -486,8 +293,8 @@
         <div class="clinic-name">FMR Interventional Quality Pain Management</div>
         <div class="md-line">F. Marina Russman, MD – Medical Director</div>
         <div class="back-hdr-extra">
-          Clinic: (XXX) XXX-XXXX<br/>
-          Address: [Clinic address here]
+          Clinic: <span id="backPhone">(310) 294-9027</span><br/>
+          Address: <span id="backAddress">20620 Leapwood Ave Unit H, Carson, CA 90746</span>
         </div>
       </div>
 
@@ -507,95 +314,121 @@
   </div>
 </section>
 
-<script>
-// We'll load employees.json at runtime. Place employees.json in same folder as this file.
+<!-- Lightweight QR library (MIT) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-M0Kw2vQvQf2j0J0v7q0l1d4QH0g3D0K9U9m8nqD2lQj3iJ4tKcU2a2zZcYl8q4G+2d8YfJ2w2z9QdH2wM1fQ2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+// Elements
 const employeeSelect = document.getElementById('employeeSelect');
 const empId = document.getElementById('empId');
-const empExp = document.getElementById('empExp');
 const empRole = document.getElementById('empRole');
 const empOffice = document.getElementById('empOffice');
-const empBarcode = document.getElementById('empBarcode');
 const empPhotoNote = document.getElementById('empPhotoNote');
+const addrSelect = document.getElementById('addrSelect');
 
 const outName = document.getElementById('outName');
 const outRole = document.getElementById('outRole');
 const outIdLine = document.getElementById('outIdLine');
 const outDept = document.getElementById('outDept');
 const outOffice = document.getElementById('outOffice');
-const outBarcode = document.getElementById('outBarcode');
 const photoFrame = document.getElementById('photoFrame');
+
+const backPhone = document.getElementById('backPhone');
+const backAddress = document.getElementById('backAddress');
+
+const qrBox = document.getElementById('qrBox');
+let qr;
+
+// Constants
+const CLINIC_PHONE = '(310) 294-9027';
+const ADDRESSES = {
+  carson: '20620 Leapwood Ave Unit H, Carson, CA 90746',
+  downey: '12115 Paramount Blvd, Downey, CA 90242',
+  westcovina: '1900 W Garvey Ave South, Suite 223, West Covina, CA 91790'
+};
+backPhone.textContent = CLINIC_PHONE;
+
+function buildQrPayload(){
+  const name = employeeSelect.value || 'Employee';
+  const idVal = empId.value || '###';
+  const title = empRole.value || 'Clinical Assistant';
+  const office = (empOffice.value || 'Carson, CA').replace(/,/g, '');
+  const today = new Date().toISOString().slice(0,10);
+  return `FMR|${idVal}|${name}|${title}|${office}|${today}`;
+}
+
+function renderQR(){
+  const payload = buildQrPayload();
+  qrBox.innerHTML = '';
+  qr = new QRCode(qrBox, { text: payload, width: 256, height: 256, correctLevel: QRCode.CorrectLevel.M });
+}
 
 function updatePreview(){
   const name = employeeSelect.value || 'Employee Name';
   const role = empRole.value || 'Clinical Assistant';
   const idVal = empId.value || '###';
-  const expVal = empExp.value || 'MM/DD/YYYY';
   const officeVal = empOffice.value || 'Carson, CA';
-  const codeVal = empBarcode.value || 'FMR-###';
   const photoText = empPhotoNote.value || 'STAFF PHOTO';
 
   outName.textContent = name;
   outRole.textContent = role;
-  outIdLine.textContent = `ID: ${idVal} • EXP: ${expVal}`;
+  outIdLine.textContent = `ID: ${idVal}`;
   outDept.textContent = 'Pain Management Clinic';
   outOffice.textContent = officeVal;
-  outBarcode.textContent = codeVal;
   photoFrame.textContent = photoText;
+
+  renderQR();
 }
 
-// Clear fields
 function clearAll(){
   employeeSelect.selectedIndex = -1;
   empId.value = '';
-  empExp.value = '';
   empRole.value = '';
   empOffice.value = '';
-  empBarcode.value = '';
   empPhotoNote.value = '';
+  addrSelect.value = 'carson';
+  backAddress.textContent = ADDRESSES.carson;
   updatePreview();
 }
 
-document.getElementById('printBtn').addEventListener('click', () => {
-  window.print();
-});
+document.getElementById('printBtn').addEventListener('click', () => window.print());
 document.getElementById('clearBtn').addEventListener('click', clearAll);
-
-[empId, empExp, empRole, empOffice, empBarcode, empPhotoNote].forEach(el => {
-  el.addEventListener('input', updatePreview);
-});
+[empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
+addrSelect.addEventListener('change', () => { backAddress.textContent = ADDRESSES[addrSelect.value] || ADDRESSES.carson; });
 
 // Load employees.json and populate dropdown
 fetch('employees.json')
   .then(r => r.json())
   .then(list => {
-    // sort alphabetically by name
     list.sort((a,b)=> a.name.localeCompare(b.name));
     list.forEach(emp => {
       const opt = document.createElement('option');
       opt.value = emp.name;
-      opt.textContent = emp.name + ' — ' + emp.title;
-      opt.dataset.role = emp.title;
-      opt.dataset.id = emp.id;
-      opt.dataset.office = emp.office;
+      opt.textContent = emp.name + (emp.title ? (' — ' + emp.title) : '');
+      opt.dataset.role = emp.title || '';
+      opt.dataset.id = emp.id || '';
+      opt.dataset.office = emp.office || '';
       employeeSelect.appendChild(opt);
     });
 
-    // when you pick someone, autofill
     employeeSelect.addEventListener('change', () => {
       const o = employeeSelect.options[employeeSelect.selectedIndex];
       if(!o) return;
-      empRole.value = o.dataset.role || '';
-      empId.value = o.dataset.id || '';
+      empRole.value   = o.dataset.role || '';
+      empId.value     = o.dataset.id || '';
       empOffice.value = o.dataset.office ? (o.dataset.office + ', CA') : '';
-      // barcode default uses ID
-      empBarcode.value = o.dataset.id ? ('FMR-' + o.dataset.id) : '';
+
+      // auto-set back address by office
+      const office = (o.dataset.office || '').toLowerCase();
+      if(office.includes('carson')) addrSelect.value = 'carson';
+      else if(office.includes('downey')) addrSelect.value = 'downey';
+      else if(office.includes('west covina') || office.includes('westcovina')) addrSelect.value = 'westcovina';
+      backAddress.textContent = ADDRESSES[addrSelect.value];
+
       updatePreview();
     });
   })
-  .catch(err => {
-    console.error('Error loading employees.json', err);
-  });
+  .catch(err => console.error('Error loading employees.json', err));
 
 updatePreview();
 </script>
