@@ -168,7 +168,7 @@
   .dept{ color:#fff; font-weight:600; font-size:.4rem; }
 
   /* QR box on front */
-  .qr-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 8px 18px rgba(0,0,0,.35); } .qr-box canvas, .qr-box img{ width:100%; height:100%; } .qr-float{ position:absolute; right:.35rem; top:1.0rem; }
+  .qr-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:none; border:1px solid #e2e8f0; } .qr-box canvas, .qr-box img{ width:100%; height:100%; } .qr-float{ position:absolute; right:.35rem; top:1.0rem; }
   .qr-box canvas, .qr-box img{ width:100%; height:100%; }
 
   /* back */
@@ -191,17 +191,11 @@
     .badge{ page-break-inside:avoid; }
   }
   /* barcode (when used instead of QR) */
-  .barcode-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 8px 18px rgba(0,0,0,.35); }
-  .barcode-box svg{ width:92%; height:92%; }
-</style>
-</head>
-<body>
-
-<!-- LEFT CONTROL PANEL -->
-<section class="panel">
-  <div class="panel-header">
-    <h1>FMR Badge Generator</h1>
-    <p>Select an employee, adjust fields if needed, then click <strong>Print Badge</strong>. This page reads <code>employees.json</code> and uses <code>fmr-logo.png</code>. Photos are NOT uploaded; place a physical headshot over the “STAFF PHOTO” box before lamination.</p>
+  .barcode-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:none; align-items:center; justify-content:center; overflow:hidden; box-shadow:none; border:1px solid #e2e8f0; }erator</h1>
+    <p>Select an employee, adjust /* inner padding around photo image */
+  .photo-wrap{ position:absolute; inset:.04in .04in .06in .04in; overflow:hidden; border-radius:.12rem; }
+  .photo-frame img{ position:absolute; left:50%; top:50%; width:100%; height:100%; object-fit:cover; transform:translate(-50%,-50%) scale(1); }
+</style>f needed, then click <strong>Print Badge</strong>. This page reads <code>employees.json</code> and uses <code>fmr-logo.png</code>. Photos are NOT uploaded; place a physical headshot over the “STAFF PHOTO” box before lamination.</p>
   </div>
   <div class="panel-body">
 
