@@ -42,7 +42,7 @@
   .btn-row{ border-top:1px solid #33415555; padding:1rem; display:flex; gap:.6rem; justify-content:flex-end; flex-wrap:wrap; }
   button{ appearance:none; border:0; border-radius:var(--radius-md); cursor:pointer; font-weight:700; font-size:.95rem; padding:.65rem 1rem; }
   #printBtn{ background:var(--green); color:#001513; }
-  #clearBtn{ background:transparent; color:var(--muted); border:1px solid #475569; }
+  #clearBtn{ background:transparent; color:#a3b2c8; border:1px solid #475569; }
   #printFrontBtn, #printBackBtn{ background:#0ea5e9; color:#00121a; }
 
   .preview-area{ display:grid; grid-template-rows:auto 1fr; gap:1rem; min-width:0; }
@@ -89,7 +89,7 @@
   .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; color:#cbd5e1; margin-top:.28rem; }
   .dept{ color:#fff; font-weight:800; font-size:.42rem; }
 
-  .qr-float{ position:absolute; right:.35rem; top:1.15rem; } /* dropped slightly to avoid overlap */
+  .qr-float{ position:absolute; right:.35rem; top:1.15rem; }
   .qr-box{
     width:1.0in; height:1.0in; background:#fff; border-radius:.15rem;
     display:flex; align-items:center; justify-content:center; overflow:hidden;
@@ -164,6 +164,7 @@
           <option value="carson" selected>Carson – 20620 Leapwood Ave Unit H, Carson, CA 90746</option>
           <option value="downey">Downey – 12115 Paramount Blvd, Downey, CA 90242</option>
           <option value="westcovina">West Covina – 1900 W Garvey Ave South, Suite 223, West Covina, CA 91790</option>
+          <option value="koreatown">Koreatown – 2970 W Olympic Blvd Suite 304, Los Angeles, CA 90006</option>
         </select>
       </label>
 
@@ -301,7 +302,14 @@
     const ADDRESSES = {
       carson: '20620 Leapwood Ave Unit H, Carson, CA 90746',
       downey: '12115 Paramount Blvd, Downey, CA 90242',
-      westcovina: '1900 W Garvey Ave South, Suite 223, West Covina, CA 91790'
+      westcovina: '1900 W Garvey Ave South, Suite 223, West Covina, CA 91790',
+      koreatown: '2970 W Olympic Blvd Suite 304, Los Angeles, CA 90006'
+    };
+    const SHORT_OFFICE = {
+      carson: 'Carson, CA',
+      downey: 'Downey, CA',
+      westcovina: 'West Covina, CA',
+      koreatown: 'Koreatown, Los Angeles, CA'
     };
     backPhone.textContent = CLINIC_PHONE;
 
@@ -310,7 +318,7 @@
       const name = employeeSelect.value || 'Employee';
       const idVal = empId.value || '###';
       const title = empRole.value || 'Clinical Assistant';
-      const office = (empOffice.value || 'Carson, CA').replace(/,/g, '');
+      const office = (empOffice.value || SHORT_OFFICE.carson).replace(/,/g, '');
       const today = new Date().toISOString().slice(0,10);
       return `FMR|${idVal}|${name}|${title}|${office}|${today}`;
     }
@@ -342,7 +350,7 @@
       const name = employeeSelect.value || 'Employee Name';
       const role = empRole.value || 'Clinical Assistant';
       const theId = empId.value || '###';
-      const officeVal = empOffice.value || 'Carson, CA';
+      const officeVal = empOffice.value || SHORT_OFFICE.carson;
       const photoText = empPhotoNote.value || 'STAFF PHOTO';
 
       outName.textContent = name;
@@ -367,16 +375,25 @@
       codeType.value = 'qr';
       addrSelect.value = 'carson';
       backAddress.textContent = ADDRESSES.carson;
+      outOffice.textContent = SHORT_OFFICE.carson;
       if(photoImg){ photoImg.removeAttribute('src'); photoImg.style.display='none'; }
       if(photoFallback){ photoFallback.style.display='flex'; }
       updatePreview();
     }
 
+    // Keep front office text in sync when the address dropdown changes
+    addrSelect.addEventListener('change', () => {
+      const key = addrSelect.value;
+      backAddress.textContent = ADDRESSES[key] || ADDRESSES.carson;
+      empOffice.value = SHORT_OFFICE[key] || SHORT_OFFICE.carson;  // mirror to input
+      outOffice.textContent = empOffice.value;                      // mirror to front
+      updatePreview();
+    });
+
     // ====== EVENTS ======
     document.getElementById('printBtn').addEventListener('click', () => window.print());
     document.getElementById('clearBtn').addEventListener('click', clearAll);
     [empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
-    addrSelect.addEventListener('change', () => { backAddress.textContent = ADDRESSES[addrSelect.value] || ADDRESSES.carson; });
     codeType.addEventListener('change', updatePreview);
 
     // Local photo upload (stays in browser)
@@ -429,16 +446,25 @@
         empOffice.value = o.dataset.office ? (o.dataset.office + ', CA') : '';
 
         const office = (o.dataset.office || '').toLowerCase();
-        if(office.includes('carson')) addrSelect.value = 'carson';
-        else if(office.includes('downey')) addrSelect.value = 'downey';
+        if(office.includes('carson'))       addrSelect.value = 'carson';
+        else if(office.includes('downey'))  addrSelect.value = 'downey';
         else if(office.includes('west covina') || office.includes('westcovina')) addrSelect.value = 'westcovina';
-        backAddress.textContent = ADDRESSES[addrSelect.value];
+        else if(office.includes('koreatown') || office.includes('korea town'))    addrSelect.value = 'koreatown';
+
+        // Mirror to back and front
+        const key = addrSelect.value;
+        backAddress.textContent = ADDRESSES[key];
+        empOffice.value = SHORT_OFFICE[key];
+        outOffice.textContent = SHORT_OFFICE[key];
+
         updatePreview();
       });
 
+      // Initialize defaults
+      empOffice.value = SHORT_OFFICE.carson;
+      backAddress.textContent = ADDRESSES.carson;
       updatePreview();
     }
-
     loadEmployees();
 
     // ====== TARGETED PRINT (FRONTS/BACKS) ======
