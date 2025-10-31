@@ -15,6 +15,7 @@
     --text-dim: #94a3b8;
     --radius-lg: .6rem;
     --radius-md: .4rem;
+    --radius-sm: .25rem;
     --font: system-ui,-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
 
@@ -29,7 +30,9 @@
     gap:1rem;
     padding:1rem;
   }
-  @media(max-width:900px){ body{grid-template-columns:1fr;} }
+  @media(max-width:900px){
+    body{grid-template-columns:1fr;}
+  }
 
   /* left control panel */
   .panel{
@@ -37,45 +40,107 @@
     border-radius:var(--radius-lg);
     border:1px solid #47556955;
     box-shadow:0 30px 60px -10px rgba(0,0,0,.8);
-    display:flex; flex-direction:column;
+    display:flex;
+    flex-direction:column;
   }
-  .panel-header{ padding:1rem 1rem .5rem; border-bottom:1px solid #33415555; }
-  .panel-header h1{ margin:0; font-size:.95rem; font-weight:700; letter-spacing:.2px; }
-  .panel-header p{ margin:.4rem 0 0; font-size:.7rem; color:var(--text-dim); line-height:1.4; }
-  .panel-body{ padding:1rem; font-size:.8rem; line-height:1.4; display:grid; gap:1rem; }
-  label{ display:flex; flex-direction:column; font-size:.7rem; font-weight:600; line-height:1.2; }
-  label .hint{ font-weight:400; font-size:.65rem; color:var(--text-dim); }
+  .panel-header{
+    padding:1rem 1rem .5rem;
+    border-bottom:1px solid #33415555;
+  }
+  .panel-header h1{
+    margin:0;
+    font-size:.95rem;
+    font-weight:700;
+    line-height:1.3;
+    color:var(--text-main);
+    letter-spacing:.2px;
+  }
+  .panel-header p{
+    margin:.4rem 0 0;
+    font-size:.7rem;
+    color:var(--text-dim);
+    line-height:1.4;
+  }
+  .panel-body{
+    padding:1rem;
+    font-size:.8rem;
+    line-height:1.4;
+    display:grid;
+    gap:1rem;
+  }
+  label{
+    display:flex;
+    flex-direction:column;
+    font-size:.7rem;
+    font-weight:600;
+    color:var(--text-main);
+    line-height:1.2;
+  }
+  label span.hint{
+    font-weight:400;
+    font-size:.65rem;
+    color:var(--text-dim);
+  }
   select,input{
-    margin-top:.4rem; width:100%;
-    background:#0f172a; border:1px solid #475569; border-radius:var(--radius-md);
-    padding:.5rem .6rem; color:var(--text-main); font-size:.8rem; outline:none;
+    margin-top:.4rem;
+    width:100%;
+    background:#0f172a;
+    border:1px solid #475569;
+    border-radius:var(--radius-md);
+    padding:.5rem .6rem;
+    color:var(--text-main);
+    font-family:inherit;
+    font-size:.8rem;
+    line-height:1.3;
+    outline:none;
   }
-  select:focus,input:focus{ border-color:var(--fmr-green); box-shadow:0 0 0 2px #53b76a33; }
+  select:focus,input:focus{
+    border-color:var(--fmr-green);
+    box-shadow:0 0 0 2px #53b76a33;
+  }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
   .btn-row{
-    border-top:1px solid #33415555; background:#02061755; padding:1rem;
-    display:flex; flex-wrap:wrap; gap:.5rem; justify-content:flex-end;
+    border-top:1px solid #33415555;
+    background:#02061755;
+    padding:1rem;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    justify-content:flex-end;
     border-radius:0 0 var(--radius-lg) var(--radius-lg);
   }
   button{
-    appearance:none; border:0; border-radius:var(--radius-md);
-    background:var(--fmr-green); color:#0a0f1f; font-size:.8rem; font-weight:700;
-    padding:.6rem .9rem; cursor:pointer; box-shadow:0 20px 30px -8px rgba(83,183,106,.45);
+    appearance:none;
+    border:0;
+    border-radius:var(--radius-md);
+    background:var(--fmr-green);
+    color:#0a0f1f;
+    font-size:.8rem;
+    font-weight:700;
+    line-height:1.2;
+    padding:.6rem .9rem;
+    cursor:pointer;
+    box-shadow:0 20px 30px -8px rgba(83,183,106,.45);
   }
   button.sec{ background:transparent; color:var(--text-dim); border:1px solid #475569; box-shadow:none; }
 
-  /* right preview */
+  /* right preview area */
   .preview-area{ display:grid; grid-template-rows:auto 1fr; gap:1rem; }
-  .preview-head{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; }
-  .preview-head h2{ margin:0; font-size:.95rem; font-weight:700; }
+  .preview-head{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; }
+  .preview-head h2{ margin:0; font-size:.95rem; font-weight:700; color:var(--text-main); }
   .preview-head p{ margin:.25rem 0 0; font-size:.7rem; color:var(--text-dim); }
+
   .preview-grid{ display:flex; flex-wrap:wrap; gap:1rem; }
 
-  /* badge base */
+  /* badge base shared */
   .badge{
-    width:3.375in; height:2.125in; box-sizing:border-box;
-    border-radius:.4rem; border:2px solid #0f172a; overflow:hidden;
-    box-shadow:0 25px 40px -10px rgba(0,0,0,.8); position:relative;
+    width:3.375in; height:2.125in;
+    border-radius:.4rem; box-sizing:border-box;
+    box-shadow:0 25px 40px -10px rgba(0,0,0,.8);
+    position:relative; border:2px solid #0f172a; overflow:hidden; font-family:var(--font);
   }
+  /* Hide the slot/hole entirely */
+  .slot{ display:none; }
 
   /* front */
   .badge-front{
@@ -86,62 +151,48 @@
     color:#fff; display:grid; grid-template-rows:auto 1fr auto; padding:.48rem .5rem;
   }
   .front-header{ display:flex; gap:.4rem; align-items:flex-start; }
-  .logo-wrap{ width:1.0in; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .logo-wrap{ flex:0 0 auto; width:1.0in; display:flex; flex-direction:column; align-items:center; text-align:center; }
   .logo-wrap img{ max-width:100%; max-height:.9in; object-fit:contain; }
-  .clinic-text{ font-size:.42rem; font-weight:600; text-transform:uppercase; letter-spacing:.03em; }
-  .clinic-text small{ display:block; font-size:.36rem; font-weight:400; color:#cbd5e1; margin-top:.15rem; font-style:italic; }
+  .clinic-text{ font-size:.42rem; line-height:1.3; font-weight:600; text-transform:uppercase; letter-spacing:.03em; color:#fff; }
+  .clinic-text small{ display:block; font-size:.36rem; font-weight:400; color:#cbd5e1; line-height:1.2; margin-top:.15rem; font-style:italic; text-transform:none; letter-spacing:0; }
 
   .front-body{ display:grid; grid-template-columns:auto 1fr; gap:.45rem; align-items:center; margin-top:.2rem; }
-  .photo-frame{
-    width:1in; height:1.25in; background:#0f172a; border:2px solid #1e293b; border-radius:.15rem;
-    color:#94a3b8; font-size:.45rem; display:flex; align-items:center; justify-content:center;
-    text-align:center; padding:.2rem; box-sizing:border-box;
-  }
+  .photo-frame{ width:1in; height:1.25in; background:#0f172a; border:2px solid #1e293b; border-radius:.15rem; color:#94a3b8; font-size:.45rem; display:flex; align-items:center; justify-content:center; text-align:center; padding:.2rem; box-sizing:border-box; position:relative; }
+  .photo-frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:.12rem; }
   .id-info{ display:flex; flex-direction:column; line-height:1.2; position:relative; z-index:1; }
-  .emp-name{ font-size:.62rem; font-weight:700; white-space:normal; }
+  .emp-name{ font-size:.62rem; font-weight:700; color:#fff; white-space:normal; }
   .emp-role{ font-size:.46rem; font-weight:600; color:var(--fmr-green); margin-top:.15rem; }
   .emp-idline{ font-size:.4rem; color:#cbd5e1; margin-top:.3rem; }
 
-  .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; color:#cbd5e1; margin-top:.28rem; }
-  .dept{ color:#fff; font-weight:700; font-size:.4rem; }
+  .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; line-height:1.3; color:#cbd5e1; margin-top:.28rem; }
+  .dept{ color:#fff; font-weight:600; font-size:.4rem; }
 
-  /* code box (right-float) */
-  .qr-float{ position:absolute; right:.35rem; top:1.0rem; }
-  .qr-box{
-    width:1.0in; height:1.0in; background:#fff; border-radius:.15rem;
-    display:flex; align-items:center; justify-content:center; overflow:hidden;
-    box-shadow:0 8px 18px rgba(0,0,0,.35);
-  }
+  /* QR box on front */
+  .qr-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 8px 18px rgba(0,0,0,.35); } .qr-box canvas, .qr-box img{ width:100%; height:100%; } .qr-float{ position:absolute; right:.35rem; top:1.0rem; }
   .qr-box canvas, .qr-box img{ width:100%; height:100%; }
-  .barcode-box{
-    width:1.0in; height:1.0in; background:#fff; border-radius:.15rem;
-    display:none; align-items:center; justify-content:center; overflow:hidden;
-    box-shadow:0 8px 18px rgba(0,0,0,.35);
-  }
-  .barcode-box svg{ width:92%; height:92%; }
 
   /* back */
-  .badge-back{
-    background:#fff; color:#0f172a; border:2px solid #0f172a;
-    display:flex; flex-direction:column; justify-content:space-between;
-    padding:.5rem .5rem .4rem;
-  }
-  .back-header{ font-size:.5rem; font-weight:700; color:#042945; }
+  .badge-back{ background:#fff; color:#0f172a; border:2px solid #0f172a; display:flex; flex-direction:column; justify-content:space-between; padding:.5rem .5rem .4rem; font-family:var(--font); }
+  .back-header{ font-size:.5rem; font-weight:700; line-height:1.3; color:#042945; text-align:left; }
   .clinic-name{ text-transform:uppercase; letter-spacing:.04em; }
   .md-line{ font-size:.45rem; font-weight:500; color:#2563eb; }
-  .back-hdr-extra{ margin-top:.3rem; font-size:.45rem; font-weight:500; color:#1e293b; }
+  .back-hdr-extra{ margin-top:.3rem; font-size:.45rem; font-weight:500; color:#1e293b; line-height:1.4; }
   .back-body{ font-size:.4rem; line-height:1.45; color:#1e293b; }
   .label{ font-weight:700; color:#000; }
-  .back-footer{ font-size:.35rem; color:#475569; border-top:1px solid #94a3b8; padding-top:.3rem; }
+  .back-footer{ font-size:.35rem; line-height:1.4; color:#475569; border-top:1px solid #94a3b8; padding-top:.3rem; }
 
-  /* print */
+  /* PRINT MODE */
   @media print{
     body{ background:#fff; color:#000; display:block; padding:0; margin:0; }
     .panel{display:none !important;}
     .preview-area{ margin:1rem; }
     .preview-head{display:none !important;}
+    .preview-grid{ display:flex; flex-wrap:wrap; gap:1rem; }
     .badge{ page-break-inside:avoid; }
   }
+  /* barcode (when used instead of QR) */
+  .barcode-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 8px 18px rgba(0,0,0,.35); }
+  .barcode-box svg{ width:92%; height:92%; }
 </style>
 </head>
 <body>
@@ -150,7 +201,7 @@
 <section class="panel">
   <div class="panel-header">
     <h1>FMR Badge Generator</h1>
-    <p>Select an employee, adjust fields if needed, then click <strong>Print Badge</strong>. This page reads <code>employees.json</code> and uses <code>fmr-logo.png</code>. Photos are NOT uploaded; place a real headshot over the “STAFF PHOTO” box before lamination.</p>
+    <p>Select an employee, adjust fields if needed, then click <strong>Print Badge</strong>. This page reads <code>employees.json</code> and uses <code>fmr-logo.png</code>. Photos are NOT uploaded; place a physical headshot over the “STAFF PHOTO” box before lamination.</p>
   </div>
   <div class="panel-body">
 
@@ -192,8 +243,14 @@
     </label>
 
     <label>
+      Upload headshot (local only)
+      <span class="hint">Image stays in your browser; not uploaded anywhere</span>
+      <input id="photoInput" type="file" accept="image/*" />
+    </label>
+
+    <label>
       Photo note
-      <span class="hint">Printed badge shows this text box; you’ll place a real headshot sticker over it</span>
+      <span class="hint">Printed badge shows this text box if no photo is loaded</span>
       <input id="empPhotoNote" placeholder="STAFF PHOTO" />
     </label>
 
@@ -222,6 +279,13 @@
           <!-- Ensure fmr-logo.png is in repo root -->
           <img src="fmr-logo.png" alt="FMR Logo" />
         </div>
+      <!-- Floating QR on empty right side -->
+      <div class="qr-float">
+        <div id="qrBox" class="qr-box"></div>
+        <div id="barcodeBox" class="barcode-box" style="display:none;">
+          <svg id="barcode"></svg>
+        </div>
+      </div>
         <div class="clinic-text">
           INTERVENTIONAL QUALITY<br/>PAIN MANAGEMENT
           <small>F. Marina Russman, MD</small>
@@ -229,7 +293,10 @@
       </div>
 
       <div class="front-body">
-        <div class="photo-frame" id="photoFrame">STAFF PHOTO</div>
+        <div class="photo-frame" id="photoFrame">
+          <img id="photoImg" alt="Staff photo" style="display:none;" />
+          <div id="photoFallback">STAFF PHOTO</div>
+        </div>
         <div class="id-info">
           <div class="emp-name" id="outName">Employee Name</div>
           <div class="emp-role" id="outRole">Clinical Assistant</div>
@@ -242,14 +309,7 @@
           <div class="dept" id="outDept">Pain Management Clinic</div>
           <div id="outOffice">Carson, CA</div>
         </div>
-      </div>
-
-      <!-- Code box floating on right -->
-      <div class="qr-float">
-        <div id="qrBox" class="qr-box"></div>
-        <div id="barcodeBox" class="barcode-box">
-          <svg id="barcode"></svg>
-        </div>
+        
       </div>
     </section>
 
@@ -280,137 +340,128 @@
   </div>
 </section>
 
-<!-- QR + Barcode libs (MIT) -->
+<!-- Lightweight QR lib (MIT) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- JsBarcode for Code128 (MIT) -->
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
-
 <script>
-  // Elements
-  const employeeSelect = document.getElementById('employeeSelect');
-  const empId = document.getElementById('empId');
-  const empRole = document.getElementById('empRole');
-  const empOffice = document.getElementById('empOffice');
-  const empPhotoNote = document.getElementById('empPhotoNote');
-  const addrSelect = document.getElementById('addrSelect');
-  const codeType = document.getElementById('codeType');
+// Elements
+const employeeSelect = document.getElementById('employeeSelect');
+const empId = document.getElementById('empId');
+const empRole = document.getElementById('empRole');
+const empOffice = document.getElementById('empOffice');
+const empPhotoNote = document.getElementById('empPhotoNote');
+  const photoInput   = document.getElementById('photoInput');
+const addrSelect = document.getElementById('addrSelect');
 
-  const outName = document.getElementById('outName');
-  const outRole = document.getElementById('outRole');
-  const outIdLine = document.getElementById('outIdLine');
-  const outDept = document.getElementById('outDept');
-  const outOffice = document.getElementById('outOffice');
-  const photoFrame = document.getElementById('photoFrame');
+const outName = document.getElementById('outName');
+const outRole = document.getElementById('outRole');
+const outIdLine = document.getElementById('outIdLine');
+const outDept = document.getElementById('outDept');
+const outOffice = document.getElementById('outOffice');
+const photoFrame = document.getElementById('photoFrame');
+  const photoImg     = document.getElementById('photoImg');
+  const photoFallback= document.getElementById('photoFallback');
 
-  const backPhone = document.getElementById('backPhone');
-  const backAddress = document.getElementById('backAddress');
+const backPhone = document.getElementById('backPhone');
+const backAddress = document.getElementById('backAddress');
 
-  const qrBox = document.getElementById('qrBox');
-  const barcodeBox = document.getElementById('barcodeBox');
-  const barcodeSvg = document.getElementById('barcode');
-  let qr;
+const qrBox = document.getElementById('qrBox');
+const barcodeBox = document.getElementById('barcodeBox');
+const barcodeSvg = document.getElementById('barcode');
+const codeType = document.getElementById('codeType');
+let qr;
 
-  // Constants
-  const CLINIC_PHONE = '(310) 294-9027';
-  const ADDRESSES = {
-    carson: '20620 Leapwood Ave Unit H, Carson, CA 90746',
-    downey: '12115 Paramount Blvd, Downey, CA 90242',
-    westcovina: '1900 W Garvey Ave South, Suite 223, West Covina, CA 91790'
-  };
-  backPhone.textContent = CLINIC_PHONE;
+// Constants
+const CLINIC_PHONE = '(310) 294-9027';
+const ADDRESSES = {
+  carson: '20620 Leapwood Ave Unit H, Carson, CA 90746',
+  downey: '12115 Paramount Blvd, Downey, CA 90242',
+  westcovina: '1900 W Garvey Ave South, Suite 223, West Covina, CA 91790'
+};
+backPhone.textContent = CLINIC_PHONE;
 
-  function buildQrPayload(){
-    const name = employeeSelect.value || 'Employee';
-    const idVal = empId.value || '###';
-    const title = empRole.value || 'Clinical Assistant';
-    const office = (empOffice.value || 'Carson, CA').replace(/,/g, '');
-    const today = new Date().toISOString().slice(0,10);
-    return `FMR|${idVal}|${name}|${title}|${office}|${today}`;
+function buildQrPayload(){
+  const name = employeeSelect.value || 'Employee';
+  const idVal = empId.value || '###';
+  const title = empRole.value || 'Clinical Assistant';
+  const office = (empOffice.value || 'Carson, CA').replace(/,/g, '');
+  const today = new Date().toISOString().slice(0,10);
+  return `FMR|${idVal}|${name}|${title}|${office}|${today}`;
+}
+
+function renderQR(){
+  const payload = buildQrPayload();
+  qrBox.innerHTML = '';
+  qr = new QRCode(qrBox, { text: payload, width: 256, height: 256, correctLevel: QRCode.CorrectLevel.M });
+}
+
+function renderBarcode(){
+  const idVal = empId.value || '###';
+  const payload = 'FMR-' + idVal; // simple, scannable content
+  try{
+    JsBarcode(barcodeSvg, payload, {format:'CODE128', displayValue:true, fontSize:12, margin:2});
+  }catch(e){ console.error('Barcode error', e); }
+}
+
+function renderCode(){
+  if(codeType.value === 'barcode'){
+    barcodeBox.style.display='flex';
+    qrBox.style.display='none';
+    renderBarcode();
+  } else {
+    barcodeBox.style.display='none';
+    qrBox.style.display='flex';
+    renderQR();
+  }
+}
+
+function updatePreview(){
+  const name = employeeSelect.value || 'Employee Name';
+  const role = empRole.value || 'Clinical Assistant';
+  const idVal = empId.value || '###';
+  const officeVal = empOffice.value || 'Carson, CA';
+  const photoText = empPhotoNote.value || 'STAFF PHOTO';
+
+  outName.textContent = name;
+  outRole.textContent = role;
+  outIdLine.textContent = `ID: ${idVal}`;
+  outDept.textContent = 'Pain Management Clinic';
+  outOffice.textContent = officeVal;
+  // show fallback text only when no photo image loaded
+  if(photoImg && photoImg.style.display !== 'block'){
+    photoFallback.textContent = photoText;
+    photoFallback.style.display = 'flex';
   }
 
-  function renderQR(){
-    const payload = buildQrPayload();
-    qrBox.innerHTML = '';
-    qr = new QRCode(qrBox, { text: payload, width: 256, height: 256, correctLevel: QRCode.CorrectLevel.M });
-  }
+  renderCode();
+}
 
-  function renderBarcode(){
-    const idVal = empId.value || '###';
-    const payload = 'FMR-' + idVal; // simple, scannable
-    try{ JsBarcode(barcodeSvg, payload, {format:'CODE128', displayValue:true, fontSize:12, margin:2}); }
-    catch(e){ console.error('Barcode error', e); }
-  }
+function clearAll(){
+  employeeSelect.selectedIndex = -1;
+  empId.value = '';
+  empRole.value = '';
+  empOffice.value = '';
+  empPhotoNote.value = '';
+  addrSelect.value = 'carson';
+  backAddress.textContent = ADDRESSES.carson;
+  updatePreview();
+}
 
-  function renderCode(){
-    if(codeType.value === 'barcode'){
-      barcodeBox.style.display='flex';
-      qrBox.style.display='none';
-      renderBarcode();
-    }else{
-      barcodeBox.style.display='none';
-      qrBox.style.display='flex';
-      renderQR();
-    }
-  }
+document.getElementById('printBtn').addEventListener('click', () => window.print());
+document.getElementById('clearBtn').addEventListener('click', clearAll);
+[empId, empRole, empOffice, empPhotoNote, codeType].forEach(el => el.addEventListener('input', updatePreview));
+addrSelect.addEventListener('change', () => { backAddress.textContent = ADDRESSES[addrSelect.value] || ADDRESSES.carson; });
 
-  function updatePreview(){
-    const name = employeeSelect.value || 'Employee Name';
-    const role = empRole.value || 'Clinical Assistant';
-    const idVal = empId.value || '###';
-    const officeVal = empOffice.value || 'Carson, CA';
-    const photoText = empPhotoNote.value || 'STAFF PHOTO';
-
-    outName.textContent = name;
-    outRole.textContent = role;
-    outIdLine.textContent = `ID: ${idVal}`;
-    outDept.textContent = 'Pain Management Clinic';
-    outOffice.textContent = officeVal;
-    photoFrame.textContent = photoText;
-
-    renderCode();
-  }
-
-  function clearAll(){
-    employeeSelect.selectedIndex = -1;
-    empId.value = '';
-    empRole.value = '';
-    empOffice.value = '';
-    empPhotoNote.value = '';
-    codeType.value = 'qr';
-    addrSelect.value = 'carson';
-    backAddress.textContent = ADDRESSES.carson;
-    updatePreview();
-  }
-
-  document.getElementById('printBtn').addEventListener('click', () => window.print());
-  document.getElementById('clearBtn').addEventListener('click', clearAll);
-  [empId, empRole, empOffice, empPhotoNote, codeType].forEach(el => el.addEventListener('input', updatePreview));
-  addrSelect.addEventListener('change', () => { backAddress.textContent = ADDRESSES[addrSelect.value] || ADDRESSES.carson; });
-
-  // Robust employees.json loader with cache-busting + friendly fallback
-  async function loadEmployees() {
-    let list = [];
-    try {
-      const res = await fetch('employees.json?cb=' + Date.now(), { cache: 'no-store' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      list = await res.json();
-    } catch (e) {
-      console.error('Error loading employees.json:', e);
-    }
-
-    if (!Array.isArray(list) || list.length === 0) {
-      const opt = document.createElement('option');
-      opt.value = '';
-      opt.textContent = '— no employees found —';
-      employeeSelect.appendChild(opt);
-      updatePreview();
-      return;
-    }
-
-    list.sort((a,b)=> (a.name||'').localeCompare(b.name||''));
+// Load employees.json and populate dropdown
+fetch('employees.json')
+  .then(r => r.json())
+  .then(list => {
+    list.sort((a,b)=> a.name.localeCompare(b.name));
     list.forEach(emp => {
       const opt = document.createElement('option');
-      opt.value = emp.name || '';
-      opt.textContent = (emp.name || 'Unknown') + (emp.title ? (' — ' + emp.title) : '');
+      opt.value = emp.name;
+      opt.textContent = emp.name + (emp.title ? (' — ' + emp.title) : '');
       opt.dataset.role = emp.title || '';
       opt.dataset.id = emp.id || '';
       opt.dataset.office = emp.office || '';
@@ -424,20 +475,43 @@
       empId.value     = o.dataset.id || '';
       empOffice.value = o.dataset.office ? (o.dataset.office + ', CA') : '';
 
+      // auto-set back address by office
       const office = (o.dataset.office || '').toLowerCase();
       if(office.includes('carson')) addrSelect.value = 'carson';
       else if(office.includes('downey')) addrSelect.value = 'downey';
       else if(office.includes('west covina') || office.includes('westcovina')) addrSelect.value = 'westcovina';
-
       backAddress.textContent = ADDRESSES[addrSelect.value];
+
       updatePreview();
     });
+  })
+  .catch(err => console.error('Error loading employees.json', err));
 
-    // trigger a first render
-    updatePreview();
-  }
+// --- Local photo upload (stays in browser) ---
+function setPhotoFromFile(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    if (photoImg) {
+      photoImg.src = e.target.result;
+      photoImg.style.display = 'block';
+    }
+    if (photoFallback) {
+      photoFallback.style.display = 'none';
+    }
+  };
+  reader.readAsDataURL(file);
+}
 
-  loadEmployees();
+// Hook up file input for local photo
+if (photoInput) {
+  photoInput.addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    setPhotoFromFile(file);
+  });
+}
+
+updatePreview();
 </script>
 
 </body>
