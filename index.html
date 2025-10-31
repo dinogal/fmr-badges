@@ -189,6 +189,9 @@
     .preview-grid{ display:flex; flex-wrap:wrap; gap:1rem; }
     .badge{ page-break-inside:avoid; }
   }
+  /* barcode (when used instead of QR) */
+  .barcode-box{ width:1.0in; height:1.0in; background:#fff; border-radius:.15rem; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 8px 18px rgba(0,0,0,.35); }
+  .barcode-box svg{ width:92%; height:92%; }
 </style>
 </head>
 <body>
@@ -231,6 +234,14 @@
     </label>
 
     <label>
+      Code type
+      <select id="codeType">
+        <option value="qr" selected>QR Code</option>
+        <option value="barcode">Barcode (Code128)</option>
+      </select>
+    </label>
+
+    <label>
       Photo note
       <span class="hint">Printed badge shows this text box; you’ll place a real headshot sticker over it</span>
       <input id="empPhotoNote" placeholder="STAFF PHOTO" />
@@ -262,7 +273,12 @@
           <img src="fmr-logo.png" alt="FMR Logo" />
         </div>
       <!-- Floating QR on empty right side -->
-      <div class="qr-float"><div id="qrBox" class="qr-box"></div></div>
+      <div class="qr-float">
+        <div id="qrBox" class="qr-box"></div>
+        <div id="barcodeBox" class="barcode-box" style="display:none;">
+          <svg id="barcode"></svg>
+        </div>
+      </div>
         <div class="clinic-text">
           INTERVENTIONAL QUALITY<br/>PAIN MANAGEMENT
           <small>F. Marina Russman, MD</small>
@@ -314,9 +330,10 @@
   </div>
 </section>
 
-<!-- Lightweight QR library (MIT) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-M0Kw2vQvQf2j0J0v7q0l1d4QH0g3D0K9U9m8nqD2lQj3iJ4tKcU2a2zZcYl8q4G+2d8YfJ2w2z9QdH2wM1fQ2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<!-- Lightweight QR lib (MIT) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- JsBarcode for Code128 (MIT) -->
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
 <script>
 // Elements
 const employeeSelect = document.getElementById('employeeSelect');
@@ -337,6 +354,9 @@ const backPhone = document.getElementById('backPhone');
 const backAddress = document.getElementById('backAddress');
 
 const qrBox = document.getElementById('qrBox');
+const barcodeBox = document.getElementById('barcodeBox');
+const barcodeSvg = document.getElementById('barcode');
+const codeType = document.getElementById('codeType');
 let qr;
 
 // Constants
@@ -363,6 +383,27 @@ function renderQR(){
   qr = new QRCode(qrBox, { text: payload, width: 256, height: 256, correctLevel: QRCode.CorrectLevel.M });
 }
 
+function renderBarcode(){
+  const idVal = empId.value || '###';
+  const payload = 'FMR-' + idVal; // simple, scannable content
+  try{
+    JsBarcode(barcodeSvg, payload, {format:'CODE128', displayValue:true, fontSize:12, margin:2});
+  }catch(e){ console.error('Barcode error', e); }
+}
+
+function renderCode(){
+  if(codeType.value === 'barcode'){
+    barcodeBox.style.display='flex';
+    qrBox.style.display='none';
+    renderBarcode();
+  }else{
+    barcodeBox.style.display='none';
+    qrBox.style.display='flex';
+    renderQR();
+  }
+});
+}
+
 function updatePreview(){
   const name = employeeSelect.value || 'Employee Name';
   const role = empRole.value || 'Clinical Assistant';
@@ -377,7 +418,7 @@ function updatePreview(){
   outOffice.textContent = officeVal;
   photoFrame.textContent = photoText;
 
-  renderQR();
+  renderCode();
 }
 
 function clearAll(){
@@ -393,7 +434,7 @@ function clearAll(){
 
 document.getElementById('printBtn').addEventListener('click', () => window.print());
 document.getElementById('clearBtn').addEventListener('click', clearAll);
-[empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
+[empId, empRole, empOffice, empPhotoNote, codeType].forEach(el => el.addEventListener('input', updatePreview));
 addrSelect.addEventListener('change', () => { backAddress.textContent = ADDRESSES[addrSelect.value] || ADDRESSES.carson; });
 
 // Load employees.json and populate dropdown
