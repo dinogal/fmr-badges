@@ -61,22 +61,14 @@
       radial-gradient(circle at 28% 18%, rgba(83,183,106,.18) 0%, transparent 60%),
       radial-gradient(circle at 72% 78%, rgba(0,75,135,.42) 0%, transparent 70%),
       var(--fmr-navy);
-    display:grid; grid-template-rows:auto 1fr auto;
-    /* TOP padding gives a lanyard-hole safe zone (adjust 0.30in if needed) */
-    padding:0.30in .50rem .48rem .40rem; color:#fff;
+    display:grid; grid-template-rows:auto 1fr auto; padding:.30rem .50rem .48rem .40rem; color:#fff;
   }
-
-  /* header row: logo + centered clinic title */
-  .front-header{
-    display:flex; gap:.4rem; align-items:flex-start; position:relative;
-  }
+  .front-header{ display:flex; gap:.5rem; align-items:flex-start; }
+  /* smaller logo in top-left corner */
   .logo-wrap{ width:0.90in; display:flex; flex-direction:column; align-items:flex-start; }
   .logo-wrap img{ max-width:100%; max-height:0.85in; object-fit:contain; margin-top:-.06rem; }
 
-  .clinic-text{
-    flex:1 1 auto; text-align:center; line-height:1.15; margin-top:.05in;
-    font-size:.54rem; font-weight:700; text-transform:uppercase;
-  }
+  .clinic-text{ font-size:.54rem; font-weight:700; text-transform:uppercase; }
   .clinic-text small{ display:block; color:#cbd5e1; font-size:.42rem; font-style:italic; margin-top:.15rem; font-weight:500; }
 
   .front-body{ display:grid; grid-template-columns:auto 1fr; gap:.45rem; align-items:flex-start; margin-top:.10rem; }
@@ -318,7 +310,7 @@
     /* ====== QR / BARCODE ====== */
     function buildQrPayload(){
       const name = employeeSelect.value || 'Employee';
-      theId = empId.value || '###';
+      const theId = empId.value || '###';
       const title = empRole.value || 'Clinical Assistant';
       const office = (empOffice.value || SHORT_OFFICE.carson).replace(/,/g, '');
       const today = new Date().toISOString().slice(0,10);
