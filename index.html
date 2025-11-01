@@ -13,6 +13,10 @@
     --text:#ffffff;
     --muted:#94a3b8;
     --font:system-ui,-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+    /* Reserve space on the RIGHT for QR (0.80" + margins) so the title
+       centers within the remaining width and shifts left automatically */
+    --qr-safe: 1.10in;
   }
 
   /* ====== LAYOUT ====== */
@@ -62,48 +66,53 @@
       radial-gradient(circle at 72% 78%, rgba(0,75,135,.42) 0%, transparent 70%),
       var(--fmr-navy);
     display:grid; grid-template-rows:auto 1fr auto;
-    /* TOP padding gives a lanyard-hole safe zone (adjust 0.30in if needed) */
+    /* Lanyard-hole safe zone at the top */
     padding:0.30in .50rem .48rem .40rem; color:#fff;
   }
 
-  /* header row: logo + centered clinic title */
+  /* header row: logo + centered clinic title (kept clear of QR via padding-right) */
   .front-header{
     display:flex; gap:.4rem; align-items:flex-start; position:relative;
+    padding-right: var(--qr-safe); /* <-- reserves QR band on the right */
   }
   .logo-wrap{ width:0.90in; display:flex; flex-direction:column; align-items:flex-start; }
   .logo-wrap img{ max-width:100%; max-height:0.85in; object-fit:contain; margin-top:-.06rem; }
 
   .clinic-text{
-    flex:1 1 auto; text-align:center; line-height:1.15; margin-top:.05in;
+    flex:1 1 auto;
+    max-width:100%;
+    margin:0 auto;                 /* centers within QR-safe area */
+    text-align:center;
+    line-height:1.15; margin-top:.05in;
     font-size:.54rem; font-weight:700; text-transform:uppercase;
   }
   .clinic-text small{ display:block; color:#cbd5e1; font-size:.42rem; font-style:italic; margin-top:.15rem; font-weight:500; }
 
   .front-body{ display:grid; grid-template-columns:auto 1fr; gap:.45rem; align-items:flex-start; margin-top:.10rem; }
 
-  /* move photo higher (bigger bottom margin raises it) */
+  /* move photo higher */
   .photo-frame{
     width:1in; height:1.25in; background:transparent; border:none; border-radius:.15rem; position:relative;
-    margin-bottom:.80in; /* was .50in */
+    margin-bottom:.80in;
   }
   .photo-wrap{ position:absolute; inset:.04in .04in .06in .04in; overflow:hidden; border-radius:.12rem; }
   .photo-frame img{ position:absolute; left:50%; top:50%; width:100%; height:100%; object-fit:cover; transform:translate(-50%,-50%) scale(1); border-radius:.12rem; }
   #photoFallback{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:.45rem; text-align:center; padding:.2rem; }
 
-  /* NAME/ROLE/ID block sits below the code */
+  /* NAME / ROLE / ID */
   .id-info{
     display:flex; flex-direction:column; align-self:flex-start;
     margin-top:0.46in;                 /* tuned for 0.80" code */
     max-width:calc(100% - 0.90in);     /* keep text out from under code */
   }
-  /* keep on one line; JS will auto-shrink */
   .emp-name{
     font-size:9pt; font-weight:800; line-height:1.06; margin:0 0 .06rem 0;
     white-space:nowrap; overflow:hidden;
   }
+  /* Role WRAPS to multiple lines */
   .emp-role{
     font-size:9pt; color:#53b76a; margin-top:.04rem; font-weight:700;
-    white-space:nowrap; overflow:hidden;
+    white-space:normal; word-break:break-word; overflow-wrap:anywhere; line-height:1.15;
   }
   .emp-idline{ font-size:9pt; color:#cbd5e1; margin-top:.04rem; }
 
@@ -284,7 +293,6 @@
     const outName = document.getElementById('outName');
     const outRole = document.getElementById('outRole');
     const outIdLine = document.getElementById('outIdLine');
-    const outDept = document.getElementById('outDept');
     const outOffice = document.getElementById('outOffice');
 
     const backPhone = document.getElementById('backPhone');
@@ -298,7 +306,6 @@
     const photoImg = document.getElementById('photoImg');
     const photoFallback = document.getElementById('photoFallback');
 
-    /* ====== CONSTANTS ====== */
     const CLINIC_PHONE = '(310) 294-9027';
     const ADDRESSES = {
       carson: '20620 Leapwood Ave Unit H, Carson, CA 90746',
@@ -314,10 +321,9 @@
     };
     backPhone.textContent = CLINIC_PHONE;
 
-    /* ====== QR / BARCODE ====== */
     function buildQrPayload(){
       const name = employeeSelect.value || 'Employee';
-      theId = empId.value || '###';
+      const theId = empId.value || '###';
       const title = empRole.value || 'Clinical Assistant';
       const office = (empOffice.value || SHORT_OFFICE.carson).replace(/,/g, '');
       const today = new Date().toISOString().slice(0,10);
@@ -346,7 +352,6 @@
       }
     }
 
-    /* ====== ONE-LINE AUTO-FIT ====== */
     function fitTextToOneLine(el, maxPt=9, minPt=7, step=0.25){
       if (!el) return;
       let size = maxPt;
@@ -359,7 +364,6 @@
       }
     }
 
-    /* ====== PREVIEW UPDATE ====== */
     function updatePreview(){
       const name = employeeSelect.value || 'Employee Name';
       const role = empRole.value || 'Clinical Assistant';
@@ -368,13 +372,10 @@
       const photoText = empPhotoNote.value || 'STAFF PHOTO';
 
       outName.textContent = name;
-      fitTextToOneLine(outName, 9, 6);      // allow down to 6pt for long names
+      fitTextToOneLine(outName, 9, 6);   // name = one line
 
-      outRole.textContent = role;
-      fitTextToOneLine(outRole, 9, 5.75);   // title can shrink slightly more
-
-      outIdLine.textContent = `ID: ${theId}`;
-      outDept.textContent = 'Pain Management Clinic';
+      outRole.textContent = role;        // role can wrap
+      document.getElementById('outIdLine').textContent = `ID: ${theId}`;
       outOffice.textContent = officeVal;
 
       if(photoImg && photoImg.style.display !== 'block'){
@@ -399,7 +400,6 @@
       updatePreview();
     }
 
-    /* Sync office text with address dropdown */
     addrSelect.addEventListener('change', () => {
       const key = addrSelect.value;
       backAddress.textContent = ADDRESSES[key] || ADDRESSES.carson;
@@ -407,26 +407,21 @@
       outOffice.textContent = empOffice.value;
       updatePreview();
       fitTextToOneLine(outName, 9, 6);
-      fitTextToOneLine(outRole, 9, 5.75);
     });
 
-    /* Buttons / inputs */
     document.getElementById('printBtn').addEventListener('click', () => window.print());
     document.getElementById('clearBtn').addEventListener('click', clearAll);
     [empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
     codeType.addEventListener('change', updatePreview);
-    window.addEventListener('resize', () => {
-      fitTextToOneLine(outName, 9, 6);
-      fitTextToOneLine(outRole, 9, 5.75);
-    });
+    window.addEventListener('resize', () => fitTextToOneLine(outName, 9, 6));
 
-    /* Local photo upload */
     function setPhotoFromFile(file){
       if(!file) return;
       const reader = new FileReader();
       reader.onload = e => {
-        if (photoImg) { photoImg.src = e.target.result; photoImg.style.display = 'block'; }
-        if (photoFallback) { photoFallback.style.display = 'none'; }
+        photoImg.src = e.target.result;
+        photoImg.style.display = 'block';
+        photoFallback.style.display = 'none';
       };
       reader.readAsDataURL(file);
     }
@@ -435,7 +430,6 @@
       setPhotoFromFile(file);
     });
 
-    /* ====== LOAD EMPLOYEES ====== */
     async function loadEmployees(){
       let list = [];
       try{
@@ -480,15 +474,12 @@
 
         updatePreview();
         fitTextToOneLine(outName, 9, 6);
-        fitTextToOneLine(outRole, 9, 5.75);
       });
 
-      /* Initialize defaults */
       empOffice.value = SHORT_OFFICE.carson;
       backAddress.textContent = ADDRESSES.carson;
       updatePreview();
       fitTextToOneLine(outName, 9, 6);
-      fitTextToOneLine(outRole, 9, 5.75);
     }
     loadEmployees();
   </script>
