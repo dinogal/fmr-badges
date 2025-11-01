@@ -12,7 +12,6 @@
     --green:#53b76a;
     --text:#ffffff;
     --muted:#94a3b8;
-    --radius-lg:.6rem; --radius-md:.4rem;
     --font:system-ui,-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
 
@@ -65,15 +64,19 @@
     display:grid; grid-template-rows:auto 1fr auto; padding:.30rem .50rem .48rem .40rem; color:#fff;
   }
   .front-header{ display:flex; gap:.5rem; align-items:flex-start; }
-  .logo-wrap{ width:1.05in; display:flex; flex-direction:column; align-items:flex-start; }
-  .logo-wrap img{ max-width:100%; max-height:1.0in; object-fit:contain; margin-top:-.08rem; }
+  /* smaller logo in top-left corner */
+  .logo-wrap{ width:0.90in; display:flex; flex-direction:column; align-items:flex-start; }
+  .logo-wrap img{ max-width:100%; max-height:0.85in; object-fit:contain; margin-top:-.06rem; }
+
   .clinic-text{ font-size:.54rem; font-weight:700; text-transform:uppercase; }
   .clinic-text small{ display:block; color:#cbd5e1; font-size:.42rem; font-style:italic; margin-top:.15rem; font-weight:500; }
 
   .front-body{ display:grid; grid-template-columns:auto 1fr; gap:.45rem; align-items:flex-start; margin-top:.10rem; }
+
+  /* move photo higher (bigger bottom margin raises it) */
   .photo-frame{
     width:1in; height:1.25in; background:transparent; border:none; border-radius:.15rem; position:relative;
-    margin-bottom:.50in; /* keep photo 1/2″ above bottom edge */
+    margin-bottom:.80in; /* was .50in */
   }
   .photo-wrap{ position:absolute; inset:.04in .04in .06in .04in; overflow:hidden; border-radius:.12rem; }
   .photo-frame img{ position:absolute; left:50%; top:50%; width:100%; height:100%; object-fit:cover; transform:translate(-50%,-50%) scale(1); border-radius:.12rem; }
@@ -91,7 +94,7 @@
     white-space:nowrap; overflow:hidden;
   }
   .emp-role{
-    font-size:9pt; color:var(--green); margin-top:.04rem; font-weight:700;
+    font-size:9pt; color:#53b76a; margin-top:.04rem; font-weight:700;
     white-space:nowrap; overflow:hidden;
   }
   .emp-idline{ font-size:9pt; color:#cbd5e1; margin-top:.04rem; }
@@ -99,7 +102,7 @@
   .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; color:#cbd5e1; margin-top:.28rem; }
   .dept{ color:#fff; font-weight:800; font-size:.42rem; }
 
-  .qr-float{ position:absolute; right:.35rem; top:0.90rem; }        /* slightly higher */
+  .qr-float{ position:absolute; right:.35rem; top:0.90rem; }
   .qr-box{
     width:0.80in; height:0.80in; background:#fff; border-radius:.15rem;
     display:flex; align-items:center; justify-content:center; overflow:hidden;
@@ -262,7 +265,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
 
   <script>
-    // ====== ELEMENTS ======
+    /* ====== ELEMENTS ====== */
     const employeeSelect = document.getElementById('employeeSelect');
     const empId = document.getElementById('empId');
     const empRole = document.getElementById('empRole');
@@ -288,7 +291,7 @@
     const photoImg = document.getElementById('photoImg');
     const photoFallback = document.getElementById('photoFallback');
 
-    // ====== CONSTANTS ======
+    /* ====== CONSTANTS ====== */
     const CLINIC_PHONE = '(310) 294-9027';
     const ADDRESSES = {
       carson: '20620 Leapwood Ave Unit H, Carson, CA 90746',
@@ -304,7 +307,7 @@
     };
     backPhone.textContent = CLINIC_PHONE;
 
-    // ====== QR / BARCODE ======
+    /* ====== QR / BARCODE ====== */
     function buildQrPayload(){
       const name = employeeSelect.value || 'Employee';
       const theId = empId.value || '###';
@@ -336,7 +339,7 @@
       }
     }
 
-    // ====== ONE-LINE AUTO-FIT ======
+    /* ====== ONE-LINE AUTO-FIT ====== */
     function fitTextToOneLine(el, maxPt=9, minPt=7, step=0.25){
       if (!el) return;
       let size = maxPt;
@@ -349,7 +352,7 @@
       }
     }
 
-    // ====== PREVIEW UPDATE ======
+    /* ====== PREVIEW UPDATE ====== */
     function updatePreview(){
       const name = employeeSelect.value || 'Employee Name';
       const role = empRole.value || 'Clinical Assistant';
@@ -389,7 +392,7 @@
       updatePreview();
     }
 
-    // Sync office text with address dropdown
+    /* Sync office text with address dropdown */
     addrSelect.addEventListener('change', () => {
       const key = addrSelect.value;
       backAddress.textContent = ADDRESSES[key] || ADDRESSES.carson;
@@ -400,7 +403,7 @@
       fitTextToOneLine(outRole, 9, 5.75);
     });
 
-    // Buttons / inputs
+    /* Buttons / inputs */
     document.getElementById('printBtn').addEventListener('click', () => window.print());
     document.getElementById('clearBtn').addEventListener('click', clearAll);
     [empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
@@ -410,7 +413,7 @@
       fitTextToOneLine(outRole, 9, 5.75);
     });
 
-    // Local photo upload
+    /* Local photo upload */
     function setPhotoFromFile(file){
       if(!file) return;
       const reader = new FileReader();
@@ -425,7 +428,7 @@
       setPhotoFromFile(file);
     });
 
-    // ====== LOAD EMPLOYEES ======
+    /* ====== LOAD EMPLOYEES ====== */
     async function loadEmployees(){
       let list = [];
       try{
@@ -473,7 +476,7 @@
         fitTextToOneLine(outRole, 9, 5.75);
       });
 
-      // Initialize defaults
+      /* Initialize defaults */
       empOffice.value = SHORT_OFFICE.carson;
       backAddress.textContent = ADDRESSES.carson;
       updatePreview();
@@ -481,24 +484,6 @@
       fitTextToOneLine(outRole, 9, 5.75);
     }
     loadEmployees();
-
-    // ====== TARGETED PRINT (FRONTS/BACKS) ======
-    function printSide(side){
-      document.body.classList.remove('print-front','print-back');
-      if(side === 'front') document.body.classList.add('print-front');
-      if(side === 'back')  document.body.classList.add('print-back');
-
-      const cleanup = () => document.body.classList.remove('print-front','print-back');
-      if ('onafterprint' in window) {
-        const handler = () => { cleanup(); window.removeEventListener('afterprint', handler); };
-        window.addEventListener('afterprint', handler);
-      } else {
-        setTimeout(cleanup, 1200);
-      }
-      window.print();
-    }
-    document.getElementById('printFrontBtn').addEventListener('click', () => printSide('front'));
-    document.getElementById('printBackBtn').addEventListener('click',  () => printSide('back'));
   </script>
 </body>
 </html>
