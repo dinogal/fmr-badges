@@ -82,8 +82,8 @@
   /* NAME/ROLE/ID block sits below the code */
   .id-info{
     display:flex; flex-direction:column; align-self:flex-start;
-    margin-top:0.50in;                 /* tuned for 0.90" code */
-    max-width:calc(100% - 1.00in);     /* keep text out from under code */
+    margin-top:0.46in;                 /* tuned for 0.80" code */
+    max-width:calc(100% - 0.90in);     /* keep text out from under code */
   }
   /* keep on one line; JS will auto-shrink */
   .emp-name{
@@ -99,15 +99,15 @@
   .front-footer{ display:flex; justify-content:space-between; align-items:flex-end; font-size:.38rem; color:#cbd5e1; margin-top:.28rem; }
   .dept{ color:#fff; font-weight:800; font-size:.42rem; }
 
-  .qr-float{ position:absolute; right:.35rem; top:1.00rem; }        /* slightly higher */
+  .qr-float{ position:absolute; right:.35rem; top:0.90rem; }        /* slightly higher */
   .qr-box{
-    width:0.90in; height:0.90in; background:#fff; border-radius:.15rem;
+    width:0.80in; height:0.80in; background:#fff; border-radius:.15rem;
     display:flex; align-items:center; justify-content:center; overflow:hidden;
     box-shadow:none; border:1px solid #e2e8f0;
   }
   .qr-box canvas, .qr-box img{ width:100%; height:100%; }
   .barcode-box{
-    width:0.90in; height:0.90in; background:#fff; border-radius:.15rem;
+    width:0.80in; height:0.80in; background:#fff; border-radius:.15rem;
     display:none; align-items:center; justify-content:center; overflow:hidden;
     box-shadow:none; border:1px solid #e2e8f0;
   }
@@ -358,10 +358,10 @@
       const photoText = empPhotoNote.value || 'STAFF PHOTO';
 
       outName.textContent = name;
-      fitTextToOneLine(outName, 9, 7);
+      fitTextToOneLine(outName, 9, 6);      // allow down to 6pt for long names
 
       outRole.textContent = role;
-      fitTextToOneLine(outRole, 9, 6.5);
+      fitTextToOneLine(outRole, 9, 5.75);   // title can shrink slightly more
 
       outIdLine.textContent = `ID: ${theId}`;
       outDept.textContent = 'Pain Management Clinic';
@@ -396,8 +396,8 @@
       empOffice.value = SHORT_OFFICE[key] || SHORT_OFFICE.carson;
       outOffice.textContent = empOffice.value;
       updatePreview();
-      fitTextToOneLine(outName, 9, 7);
-      fitTextToOneLine(outRole, 9, 6.5);
+      fitTextToOneLine(outName, 9, 6);
+      fitTextToOneLine(outRole, 9, 5.75);
     });
 
     // Buttons / inputs
@@ -406,8 +406,8 @@
     [empId, empRole, empOffice, empPhotoNote].forEach(el => el.addEventListener('input', updatePreview));
     codeType.addEventListener('change', updatePreview);
     window.addEventListener('resize', () => {
-      fitTextToOneLine(outName, 9, 7);
-      fitTextToOneLine(outRole, 9, 6.5);
+      fitTextToOneLine(outName, 9, 6);
+      fitTextToOneLine(outRole, 9, 5.75);
     });
 
     // Local photo upload
@@ -469,16 +469,16 @@
         outOffice.textContent = SHORT_OFFICE[key];
 
         updatePreview();
-        fitTextToOneLine(outName, 9, 7);
-        fitTextToOneLine(outRole, 9, 6.5);
+        fitTextToOneLine(outName, 9, 6);
+        fitTextToOneLine(outRole, 9, 5.75);
       });
 
       // Initialize defaults
       empOffice.value = SHORT_OFFICE.carson;
       backAddress.textContent = ADDRESSES.carson;
       updatePreview();
-      fitTextToOneLine(outName, 9, 7);
-      fitTextToOneLine(outRole, 9, 6.5);
+      fitTextToOneLine(outName, 9, 6);
+      fitTextToOneLine(outRole, 9, 5.75);
     }
     loadEmployees();
 
